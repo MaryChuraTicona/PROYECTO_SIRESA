@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmDatosEstablecimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatosEstablecimiento.Designer.cs">
+      <DependentUpon>frmDatosEstablecimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEstablecimiento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmDatosEstablecimiento.resx">
+      <DependentUpon>frmDatosEstablecimiento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmEstablecimiento.resx">
       <DependentUpon>frmEstablecimiento.cs</DependentUpon>
     </EmbeddedResource>

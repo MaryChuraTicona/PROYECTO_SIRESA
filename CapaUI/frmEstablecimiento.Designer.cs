@@ -46,9 +46,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(40, 26);
+            this.label1.Location = new System.Drawing.Point(30, 21);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 26);
+            this.label1.Size = new System.Drawing.Size(99, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Bienvenido";
             // 
@@ -56,25 +57,28 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(38, 71);
+            this.label2.Location = new System.Drawing.Point(28, 58);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(475, 39);
+            this.label2.Size = new System.Drawing.Size(385, 31);
             this.label2.TabIndex = 1;
             this.label2.Text = "Gestion de Establecimeintos";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(45, 142);
+            this.textBox1.Location = new System.Drawing.Point(34, 115);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(415, 22);
+            this.textBox1.Size = new System.Drawing.Size(312, 20);
             this.textBox1.TabIndex = 2;
             // 
             // btnNuevo
             // 
             this.btnNuevo.BackColor = System.Drawing.Color.Cyan;
-            this.btnNuevo.Location = new System.Drawing.Point(644, 135);
+            this.btnNuevo.Location = new System.Drawing.Point(483, 110);
+            this.btnNuevo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNuevo.Name = "btnNuevo";
-            this.btnNuevo.Size = new System.Drawing.Size(214, 29);
+            this.btnNuevo.Size = new System.Drawing.Size(160, 24);
             this.btnNuevo.TabIndex = 3;
             this.btnNuevo.Text = "+ Nuevo Establecimiento";
             this.btnNuevo.UseVisualStyleBackColor = false;
@@ -92,12 +96,13 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dataGridView1.Location = new System.Drawing.Point(45, 216);
+            this.dataGridView1.Location = new System.Drawing.Point(34, 176);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(813, 233);
+            this.dataGridView1.Size = new System.Drawing.Size(610, 189);
             this.dataGridView1.TabIndex = 4;
             // 
             // Column1
@@ -150,14 +155,15 @@
             // 
             // frmEstablecimiento
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(947, 508);
+            this.ClientSize = new System.Drawing.Size(686, 394);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmEstablecimiento";
             this.Text = "frmEstablecimiento";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
