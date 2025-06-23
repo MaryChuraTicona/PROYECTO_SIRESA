@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0EFF6991-0233-459B-845A-EB7EC2FD749A}</ProjectGuid>
+    <ProjectGuid>{ED727AE6-37D9-4498-9A23-09C3EB249BFF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CapaDatos</RootNamespace>
-    <AssemblyName>CapaDatos</AssemblyName>
+    <RootNamespace>CapaNegocios</RootNamespace>
+    <AssemblyName>CapaNegocios</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -42,11 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Conexion.cs" />
-    <Compile Include="login_CD.cs" />
+    <Compile Include="login_CN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
+      <Project>{0eff6991-0233-459b-845a-eb7ec2fd749a}</Project>
+      <Name>CapaDatos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
       <Project>{322050d3-d07b-47f4-9aa3-927dba37fb95}</Project>
       <Name>CapaEntidad</Name>

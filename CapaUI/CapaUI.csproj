@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CapaUI.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,17 +52,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAsignarFiscalizaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAsignarFiscalizaciones.Designer.cs">
+      <DependentUpon>frmAsignarFiscalizaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmEstablecimiento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmEstablecimiento.Designer.cs">
       <DependentUpon>frmEstablecimiento.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEstablecimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEstablecimientos.Designer.cs">
+      <DependentUpon>frmEstablecimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFiscalizaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFiscalizaciones.Designer.cs">
+      <DependentUpon>frmFiscalizaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportes.Designer.cs">
+      <DependentUpon>frmReportes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,6 +137,14 @@
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
       <Project>{0eff6991-0233-459b-845a-eb7ec2fd749a}</Project>
       <Name>CapaDatos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaEntidad\CapaEntidad.csproj">
+      <Project>{322050d3-d07b-47f4-9aa3-927dba37fb95}</Project>
+      <Name>CapaEntidad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaNegocios\CapaNegocios.csproj">
+      <Project>{ed727ae6-37d9-4498-9a23-09c3eb249bff}</Project>
+      <Name>CapaNegocios</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

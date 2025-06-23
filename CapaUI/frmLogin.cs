@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CapaEntidad;
+using CapaNegocios;
 using CapaDatos;
 
 namespace CapaUI
@@ -63,19 +65,19 @@ namespace CapaUI
         {
             try
             {
-                Conexion conexion = new Conexion();
-                SqlConnection conn = conexion.AbrirConexion();
+               // Conexion conexion = new Conexion();
+                //SqlConnection conn = conexion.AbrirConexion();
 
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    MessageBox.Show(" Conexión exitosa con Azure SQL.", "Conexión Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                //if (conn.State == System.Data.ConnectionState.Open)
+               // {
+                 //   MessageBox.Show(" Conexión exitosa con Azure SQL.", "Conexión Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
 
-                conexion.CerrarConexion();
+                //conexion.CerrarConexion();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al conectar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Error al conectar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -90,13 +92,19 @@ namespace CapaUI
                 txtCaptcha.Clear();
                 return;
             }
+            var logica = new login_CN();
+            var usuario = logica.IniciarSesion(txtUsuario.Text.Trim(), txtContraseña.Text.Trim());
 
-            // Aquí iría tu lógica de validación de usuario y contraseña
-            if (IsValidUser(txtUsuario.Text, txtContraseña.Text))
+            if (usuario != null)
             {
                 MessageBox.Show("Login exitoso!", "Éxito",
                               MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // Abrir formulario principal
+
+                frmPrincipal principal = new frmPrincipal(usuario);  // Se abre el MDI con el usuario logueado
+                principal.Show();
+
+                this.Hide();
+                
             }
             else
             {
@@ -106,16 +114,36 @@ namespace CapaUI
                 txtCaptcha.Clear();
             }
         }
-        private bool IsValidUser(string username, string password)
-        {
-            // Aquí implementarías la validación real contra tu base de datos
-            // Esto es solo un ejemplo
-            return username == "admin" && password == "12345";
-        }
+       
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             GenerateCaptcha();
+        }
+
+        private void btnProbarConexion_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                Conexion conexion = new Conexion();
+                SqlConnection conn = conexion.AbrirConexion();
+
+                if (conn.State == ConnectionState.Open)
+                {
+                    MessageBox.Show("✅ Conectado a la base: " + conn.Database, "Conexión Exitosa");
+                }
+
+                conexion.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("❌ Error al conectar: " + ex.Message, "Error");
+            }
         }
     }
 }
