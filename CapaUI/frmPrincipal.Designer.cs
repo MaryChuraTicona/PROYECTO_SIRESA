@@ -39,7 +39,7 @@
             // 
             // btnUsuarios
             // 
-            this.btnUsuarios.Location = new System.Drawing.Point(67, 46);
+            this.btnUsuarios.Location = new System.Drawing.Point(39, 78);
             this.btnUsuarios.Name = "btnUsuarios";
             this.btnUsuarios.Size = new System.Drawing.Size(75, 23);
             this.btnUsuarios.TabIndex = 0;
@@ -49,7 +49,7 @@
             // 
             // btnEstablecimientos
             // 
-            this.btnEstablecimientos.Location = new System.Drawing.Point(67, 75);
+            this.btnEstablecimientos.Location = new System.Drawing.Point(39, 107);
             this.btnEstablecimientos.Name = "btnEstablecimientos";
             this.btnEstablecimientos.Size = new System.Drawing.Size(75, 23);
             this.btnEstablecimientos.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // btnFiscalizaciones
             // 
-            this.btnFiscalizaciones.Location = new System.Drawing.Point(67, 117);
+            this.btnFiscalizaciones.Location = new System.Drawing.Point(39, 149);
             this.btnFiscalizaciones.Name = "btnFiscalizaciones";
             this.btnFiscalizaciones.Size = new System.Drawing.Size(75, 23);
             this.btnFiscalizaciones.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             // btnReportes
             // 
-            this.btnReportes.Location = new System.Drawing.Point(67, 211);
+            this.btnReportes.Location = new System.Drawing.Point(39, 243);
             this.btnReportes.Name = "btnReportes";
             this.btnReportes.Size = new System.Drawing.Size(75, 23);
             this.btnReportes.TabIndex = 3;
@@ -79,7 +79,7 @@
             // 
             // btnCerrarSesion
             // 
-            this.btnCerrarSesion.Location = new System.Drawing.Point(67, 250);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(39, 282);
             this.btnCerrarSesion.Name = "btnCerrarSesion";
             this.btnCerrarSesion.Size = new System.Drawing.Size(75, 23);
             this.btnCerrarSesion.TabIndex = 4;
@@ -89,9 +89,9 @@
             // 
             // btnAsignarFiscalizaciones
             // 
-            this.btnAsignarFiscalizaciones.Location = new System.Drawing.Point(67, 166);
+            this.btnAsignarFiscalizaciones.Location = new System.Drawing.Point(39, 188);
             this.btnAsignarFiscalizaciones.Name = "btnAsignarFiscalizaciones";
-            this.btnAsignarFiscalizaciones.Size = new System.Drawing.Size(228, 39);
+            this.btnAsignarFiscalizaciones.Size = new System.Drawing.Size(101, 39);
             this.btnAsignarFiscalizaciones.TabIndex = 5;
             this.btnAsignarFiscalizaciones.Text = "ASIGNAR Fiscalizaciones";
             this.btnAsignarFiscalizaciones.UseVisualStyleBackColor = true;
@@ -100,7 +100,7 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(229, 16);
+            this.lblUsuario.Location = new System.Drawing.Point(36, 26);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(56, 13);
             this.lblUsuario.TabIndex = 6;
@@ -118,6 +118,7 @@
             this.Controls.Add(this.btnFiscalizaciones);
             this.Controls.Add(this.btnEstablecimientos);
             this.Controls.Add(this.btnUsuarios);
+            this.IsMdiContainer = true;
             this.Name = "frmPrincipal";
             this.Text = "frmPrincipal";
             this.Load += new System.EventHandler(this.frmPrincipal_Load);

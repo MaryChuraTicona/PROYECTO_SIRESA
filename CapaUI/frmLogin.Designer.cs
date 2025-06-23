@@ -52,6 +52,7 @@
             this.label1.Size = new System.Drawing.Size(445, 30);
             this.label1.TabIndex = 0;
             this.label1.Text = "SIRESA - Ingreso al Sistema";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -62,6 +63,7 @@
             this.label2.Size = new System.Drawing.Size(43, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Usuario";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -72,6 +74,7 @@
             this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Contraseña";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txtUsuario
             // 
@@ -81,6 +84,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(123, 20);
             this.txtUsuario.TabIndex = 3;
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // txtContraseña
             // 
@@ -91,6 +95,7 @@
             this.txtContraseña.PasswordChar = '*';
             this.txtContraseña.Size = new System.Drawing.Size(123, 20);
             this.txtContraseña.TabIndex = 4;
+            this.txtContraseña.TextChanged += new System.EventHandler(this.txtContraseña_TextChanged);
             // 
             // btnLogin
             // 
@@ -111,6 +116,7 @@
             this.picCaptcha.Size = new System.Drawing.Size(128, 41);
             this.picCaptcha.TabIndex = 6;
             this.picCaptcha.TabStop = false;
+            this.picCaptcha.Click += new System.EventHandler(this.picCaptcha_Click);
             // 
             // txtCaptcha
             // 
@@ -119,6 +125,7 @@
             this.txtCaptcha.Name = "txtCaptcha";
             this.txtCaptcha.Size = new System.Drawing.Size(129, 20);
             this.txtCaptcha.TabIndex = 7;
+            this.txtCaptcha.TextChanged += new System.EventHandler(this.txtCaptcha_TextChanged);
             // 
             // btnRefresh
             // 
