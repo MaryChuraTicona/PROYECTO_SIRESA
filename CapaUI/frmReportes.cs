@@ -16,5 +16,12 @@ namespace CapaUI
         {
             InitializeComponent();
         }
+
+        private void frmReportes_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
+        }
     }
 }

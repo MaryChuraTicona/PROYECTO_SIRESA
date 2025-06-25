@@ -28,7 +28,7 @@ namespace CapaDatos
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
-                cmd.Parameters.AddWithValue("@claveHash", GenerarHash(clave)); // AQUÍ se genera el hash en C#
+                cmd.Parameters.AddWithValue("@claveHash", clave); // AQUÍ se genera el hash en C#
 
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -48,14 +48,7 @@ namespace CapaDatos
             return u;
         }
 
-        private byte[] GenerarHash(string textoPlano)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(textoPlano);
-                return sha256.ComputeHash(bytes);
-            }
-        }
+       
 
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaEntidad;
+
 
 namespace CapaUI
 {
@@ -24,6 +24,9 @@ namespace CapaUI
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             lblUsuario.Text = "Bienvenido: " + usuarioActual.NombreCompleto;
+            this.IsMdiContainer = true;
+           
+
 
             // CONTROL DE ACCESOS SEGÚN ROL
             switch (usuarioActual.RolID)
@@ -66,36 +69,61 @@ namespace CapaUI
             formHijo.Show();
         }
 
-        private void btnUsuarios_Click(object sender, EventArgs e)
+        private void MostrarFormulario(Form formularioHijo)
+        {
+            // Cierra formularios anteriores
+            foreach (Form frm in this.MdiChildren)
+            {
+                frm.Close();
+            }
+
+            formularioHijo.MdiParent = this;
+            formularioHijo.FormBorderStyle = FormBorderStyle.None;
+            formularioHijo.Dock = DockStyle.Fill;
+            formularioHijo.Show();
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new frmEmpleados());
+        }
+
+        private void btnUsuario_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new frmUsuarios());
         }
 
-        private void btnFiscalizaciones_Click(object sender, EventArgs e)
+        private void btnEstablecimiento_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new frmFiscalizaciones());
+            AbrirFormulario(new frmEstablecimientos(usuarioActual.UsuarioID));
         }
 
-        private void btnReportes_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario(new frmReportes());
-        }
-
-        private void btnCerrarSesion_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            frmLogin login = new frmLogin();
-            login.Show();
-        }
-
-        private void btnAsignarFiscalizaciones_Click(object sender, EventArgs e)
+        private void btnAsignar_Click(object sender, EventArgs e)
         {
             AbrirFormulario(new frmAsignarFiscalizaciones());
         }
 
-        private void btnEstablecimientos_Click(object sender, EventArgs e)
+        private void btnFiscalizacion_Click(object sender, EventArgs e)
         {
-            AbrirFormulario(new frmEstablecimientos());
+            AbrirFormulario(new frmAsignarFiscalizaciones());
+        }
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario(new frmReportes());
+        }
+
+        private void btnDenuncia_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin login = new frmLogin();
+            login.Show();
         }
     }
 }

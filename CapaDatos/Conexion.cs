@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 
+
 namespace CapaDatos
 {
     public  class Conexion
@@ -25,12 +26,14 @@ namespace CapaDatos
         public SqlConnection AbrirConexion()
         {
             if (conexion == null)
-                conexion = new SqlConnection(cadenaConexion);
+                Console.WriteLine("Cadena: " + cadenaConexion);
+            conexion = new SqlConnection(cadenaConexion);
 
-            if (conexion.State == System.Data.ConnectionState.Closed)
+            if (conexion.State == ConnectionState.Closed)
                 conexion.Open();
 
             return conexion;
+
         }
 
         public void CerrarConexion()

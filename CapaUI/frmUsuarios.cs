@@ -20,6 +20,7 @@ namespace CapaUI
     public partial class frmUsuarios : Form
     {
         private usuario_CN usuarioCN = new usuario_CN();
+        private empleadoCN empleadoCN = new empleadoCN();
         private int idUsuarioSeleccionado = 0;
         public frmUsuarios()
         {
@@ -48,7 +49,9 @@ namespace CapaUI
 
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
-
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
         }
 
         private void btnCrear_Click(object sender, EventArgs e)
@@ -210,39 +213,44 @@ namespace CapaUI
             }
 
             string dni = txtDNI.Text.Trim();
-            string url = $"https://api.apis.net.pe/v2/reniec/dni?numero={dni}";
-            string token = "apis-token-16238.tXsu3p4oFNvcBNEw8nRKdZkVPZkq16NK";
 
-            using (HttpClient client = new HttpClient())
+            // Verificar si ya hay un usuario con ese DNI
+            if (usuarioCN.Listar().Exists(u => u.DNI == dni))
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string result = await response.Content.ReadAsStringAsync();
-                        JObject data = JObject.Parse(result);
-
-                        string nombres = data["nombres"]?.ToString();
-                        string apePat = data["apellidoPaterno"]?.ToString();
-                        string apeMat = data["apellidoMaterno"]?.ToString();
-
-                        txtNombreCompleto.Text = $"{nombres} {apePat} {apeMat}";
-                    }
-                    else
-                    {
-                        MessageBox.Show("DNI no encontrado o token inválido.");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error al consultar API RENIEC: " + ex.Message);
-                }
+                MessageBox.Show("Este DNI ya está registrado como usuario.");
+                return;
             }
 
-        
+            Empleado emp = empleadoCN.BuscarEmpleadoPorDNI(dni);
+
+            if (emp != null)
+            {
+                if (emp.Edad < 18)
+                {
+                    MessageBox.Show("No se puede registrar un usuario menor de edad.");
+                    return;
+                }
+
+                txtNombreCompleto.Text = emp.NombreCompleto;
+                txtCorreo.Text = emp.Correo;
+                txtTelefono.Text = emp.Telefono;
+                txtDireccion.Text = emp.Direccion;
+
+                cmbRol.SelectedIndex = -1;
+                foreach (var item in cmbRol.Items)
+                {
+                    if (((KeyValuePair<int, string>)item).Key == emp.RolID)
+                    {
+                        cmbRol.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("DNI no encontrado en la tabla de empleados registrados.");
+            }
+
 
         }
 

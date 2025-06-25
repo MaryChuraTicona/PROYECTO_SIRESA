@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="empleadoCD.cs" />
+    <Compile Include="establecimientoCD.cs" />
     <Compile Include="login_CD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rolCD.cs" />
     <Compile Include="usuario_CD.cs" />
   </ItemGroup>
   <ItemGroup>
