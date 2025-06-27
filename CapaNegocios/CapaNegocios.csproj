@@ -44,9 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cambioCN.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="criterioCN.cs" />
+    <Compile Include="denunciaCN.cs" />
     <Compile Include="empleadoCN.cs" />
+    <Compile Include="equipoCN.cs" />
     <Compile Include="establecimientoCN.cs" />
+    <Compile Include="fiscalizacionCN.cs" />
     <Compile Include="login_CN.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rolCN.cs" />

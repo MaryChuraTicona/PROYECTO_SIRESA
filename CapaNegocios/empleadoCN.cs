@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CapaEntidad;
-using CapaDatos;
+
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
@@ -75,5 +74,35 @@ namespace CapaNegocios
 
             return null;
         }
+
+        public List<Empleado> ObtenerEmpleadosActivos()
+        {
+            return empleadoData.ListarEmpleadosActivos();
+        }
+
+        public Empleado ObtenerEmpleadoPorUsuarioID(int usuarioID)
+        {
+            return empleadoData.ObtenerEmpleadoPorUsuarioID(usuarioID);
+        }
+        public bool TieneFiscalizacionEseDia(int empleadoID, DateTime fecha)
+        {
+            return empleadoData.EmpleadoTieneFiscalizacion(empleadoID, fecha);
+        }
+
+        public bool PuedeAgregarEmpleadoEseDia(int empleadoID, DateTime fecha)
+        {
+            int cantidad = empleadoData.CantidadFiscalizacionesEnFecha(empleadoID, fecha);
+            return cantidad < 3;
+        }
+        public int ObtenerIDPorNombre(string nombreCompleto)
+        {
+            return empleadoData.ObtenerIDPorNombre(nombreCompleto);
+        }
+
+        public Empleado ObtenerEmpleadoPorID(int id)
+        {
+            return empleadoData.ObtenerEmpleadoPorID(id);
+        }
+
     }
 }

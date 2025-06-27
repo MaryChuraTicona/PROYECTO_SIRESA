@@ -41,6 +41,15 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.2.5.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video, Version=2.2.5.0, Culture=neutral, PublicKeyToken=cbfb6e07d173c401, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.2.2.5\lib\AForge.Video.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
+      <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.3296.44, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3296.44\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
@@ -66,11 +75,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmAsignarFiscalizaciones.cs">
+    <Compile Include="frmCriterioBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAsignarFiscalizaciones.Designer.cs">
-      <DependentUpon>frmAsignarFiscalizaciones.cs</DependentUpon>
+    <Compile Include="frmCriterioBase.Designer.cs">
+      <DependentUpon>frmCriterioBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCriteriosFiscalizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCriteriosFiscalizacion.Designer.cs">
+      <DependentUpon>frmCriteriosFiscalizacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDenuncia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDenuncia.Designer.cs">
+      <DependentUpon>frmDenuncia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDenunciaPublica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDenunciaPublica.Designer.cs">
+      <DependentUpon>frmDenunciaPublica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDetalleFiscalizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDetalleFiscalizacion.Designer.cs">
+      <DependentUpon>frmDetalleFiscalizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmEmpleados.cs">
       <SubType>Form</SubType>
@@ -96,17 +129,41 @@
     <Compile Include="frmFiscalizaciones.Designer.cs">
       <DependentUpon>frmFiscalizaciones.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmHistorialAccesos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHistorialAccesos.Designer.cs">
+      <DependentUpon>frmHistorialAccesos.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMisInspecciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMisInspecciones.Designer.cs">
+      <DependentUpon>frmMisInspecciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNuevaFiscalizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNuevaFiscalizacion.Designer.cs">
+      <DependentUpon>frmNuevaFiscalizacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRealizarInspeccion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRealizarInspeccion.Designer.cs">
+      <DependentUpon>frmRealizarInspeccion.cs</DependentUpon>
     </Compile>
     <Compile Include="frmReportes.cs">
       <SubType>Form</SubType>
@@ -122,8 +179,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmAsignarFiscalizaciones.resx">
-      <DependentUpon>frmAsignarFiscalizaciones.cs</DependentUpon>
+    <EmbeddedResource Include="frmCriterioBase.resx">
+      <DependentUpon>frmCriterioBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCriteriosFiscalizacion.resx">
+      <DependentUpon>frmCriteriosFiscalizacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDenuncia.resx">
+      <DependentUpon>frmDenuncia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDenunciaPublica.resx">
+      <DependentUpon>frmDenunciaPublica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDetalleFiscalizacion.resx">
+      <DependentUpon>frmDetalleFiscalizacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmEmpleados.resx">
       <DependentUpon>frmEmpleados.cs</DependentUpon>
@@ -137,11 +206,23 @@
     <EmbeddedResource Include="frmFiscalizaciones.resx">
       <DependentUpon>frmFiscalizaciones.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmHistorialAccesos.resx">
+      <DependentUpon>frmHistorialAccesos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmMisInspecciones.resx">
+      <DependentUpon>frmMisInspecciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNuevaFiscalizacion.resx">
+      <DependentUpon>frmNuevaFiscalizacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRealizarInspeccion.resx">
+      <DependentUpon>frmRealizarInspeccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportes.resx">
       <DependentUpon>frmReportes.cs</DependentUpon>

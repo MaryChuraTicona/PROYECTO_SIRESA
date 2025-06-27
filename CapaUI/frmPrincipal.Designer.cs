@@ -37,17 +37,19 @@
             this.lblUsuario = new System.Windows.Forms.Label();
             this.btnEmpleados = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDenuncias = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMisFiscalizaciones = new System.Windows.Forms.Button();
             this.btnDenuncia = new System.Windows.Forms.Button();
             this.btnEmpleado = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnUsuario = new System.Windows.Forms.Button();
             this.btnFiscalizacion = new System.Windows.Forms.Button();
             this.btnReporte = new System.Windows.Forms.Button();
-            this.btnAsignar = new System.Windows.Forms.Button();
             this.btnEstablecimiento = new System.Windows.Forms.Button();
+            this.btnDenuncias = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnHistorialAccesos = new System.Windows.Forms.Button();
+            this.btnCriterios = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -64,7 +66,6 @@
             this.btnUsuarios.TabIndex = 0;
             this.btnUsuarios.Text = "Usuarios";
             this.btnUsuarios.UseVisualStyleBackColor = false;
-//            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
             // btnEstablecimientos
             // 
@@ -77,7 +78,6 @@
             this.btnEstablecimientos.TabIndex = 1;
             this.btnEstablecimientos.Text = "Establecimientos";
             this.btnEstablecimientos.UseVisualStyleBackColor = false;
-     //       this.btnEstablecimientos.Click += new System.EventHandler(this.btnEstablecimientos_Click);
             // 
             // btnFiscalizaciones
             // 
@@ -90,7 +90,6 @@
             this.btnFiscalizaciones.TabIndex = 2;
             this.btnFiscalizaciones.Text = "Fiscalizaciones";
             this.btnFiscalizaciones.UseVisualStyleBackColor = false;
-          //  this.btnFiscalizaciones.Click += new System.EventHandler(this.btnFiscalizaciones_Click);
             // 
             // btnReportes
             // 
@@ -103,7 +102,6 @@
             this.btnReportes.TabIndex = 3;
             this.btnReportes.Text = "Reportes";
             this.btnReportes.UseVisualStyleBackColor = false;
-         //   this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // btnCerrarSesion
             // 
@@ -116,7 +114,6 @@
             this.btnCerrarSesion.TabIndex = 4;
             this.btnCerrarSesion.Text = "CerrarSesion";
             this.btnCerrarSesion.UseVisualStyleBackColor = false;
-          //  this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // btnAsignarFiscalizaciones
             // 
@@ -128,7 +125,6 @@
             this.btnAsignarFiscalizaciones.TabIndex = 5;
             this.btnAsignarFiscalizaciones.Text = "ASIGNAR Fiscalizaciones";
             this.btnAsignarFiscalizaciones.UseVisualStyleBackColor = false;
-           // this.btnAsignarFiscalizaciones.Click += new System.EventHandler(this.btnAsignarFiscalizaciones_Click);
             // 
             // lblUsuario
             // 
@@ -153,7 +149,6 @@
             this.btnEmpleados.TabIndex = 8;
             this.btnEmpleados.Text = "Empleados";
             this.btnEmpleados.UseVisualStyleBackColor = false;
-           // this.btnEmpleados.Click += new System.EventHandler(this.btnEmpleados_Click);
             // 
             // panel1
             // 
@@ -175,29 +170,18 @@
             this.panel1.Size = new System.Drawing.Size(159, 468);
             this.panel1.TabIndex = 10;
             // 
-            // btnDenuncias
-            // 
-            this.btnDenuncias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnDenuncias.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDenuncias.ForeColor = System.Drawing.Color.White;
-            this.btnDenuncias.Location = new System.Drawing.Point(3, 362);
-            this.btnDenuncias.Name = "btnDenuncias";
-            this.btnDenuncias.Size = new System.Drawing.Size(156, 46);
-            this.btnDenuncias.TabIndex = 9;
-            this.btnDenuncias.Text = "Denuncias";
-            this.btnDenuncias.UseVisualStyleBackColor = false;
-            // 
             // panel2
             // 
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel2.Controls.Add(this.btnCriterios);
+            this.panel2.Controls.Add(this.btnMisFiscalizaciones);
             this.panel2.Controls.Add(this.btnDenuncia);
             this.panel2.Controls.Add(this.btnEmpleado);
             this.panel2.Controls.Add(this.btnCerrar);
             this.panel2.Controls.Add(this.btnUsuario);
             this.panel2.Controls.Add(this.btnFiscalizacion);
             this.panel2.Controls.Add(this.btnReporte);
-            this.panel2.Controls.Add(this.btnAsignar);
             this.panel2.Controls.Add(this.btnEstablecimiento);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -205,6 +189,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(159, 468);
             this.panel2.TabIndex = 11;
+            // 
+            // btnMisFiscalizaciones
+            // 
+            this.btnMisFiscalizaciones.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnMisFiscalizaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMisFiscalizaciones.ForeColor = System.Drawing.Color.White;
+            this.btnMisFiscalizaciones.Location = new System.Drawing.Point(0, 215);
+            this.btnMisFiscalizaciones.Name = "btnMisFiscalizaciones";
+            this.btnMisFiscalizaciones.Size = new System.Drawing.Size(159, 39);
+            this.btnMisFiscalizaciones.TabIndex = 10;
+            this.btnMisFiscalizaciones.Text = "Mis Fiscalizaciones";
+            this.btnMisFiscalizaciones.UseVisualStyleBackColor = false;
+            this.btnMisFiscalizaciones.Click += new System.EventHandler(this.btnMisFiscalizaciones_Click);
             // 
             // btnDenuncia
             // 
@@ -284,18 +281,6 @@
             this.btnReporte.UseVisualStyleBackColor = false;
             this.btnReporte.Click += new System.EventHandler(this.btnReporte_Click);
             // 
-            // btnAsignar
-            // 
-            this.btnAsignar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnAsignar.ForeColor = System.Drawing.Color.White;
-            this.btnAsignar.Location = new System.Drawing.Point(0, 220);
-            this.btnAsignar.Name = "btnAsignar";
-            this.btnAsignar.Size = new System.Drawing.Size(159, 39);
-            this.btnAsignar.TabIndex = 5;
-            this.btnAsignar.Text = "ASIGNAR Fiscalizaciones";
-            this.btnAsignar.UseVisualStyleBackColor = false;
-            this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
-            // 
             // btnEstablecimiento
             // 
             this.btnEstablecimiento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -309,9 +294,22 @@
             this.btnEstablecimiento.UseVisualStyleBackColor = false;
             this.btnEstablecimiento.Click += new System.EventHandler(this.btnEstablecimiento_Click);
             // 
+            // btnDenuncias
+            // 
+            this.btnDenuncias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDenuncias.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDenuncias.ForeColor = System.Drawing.Color.White;
+            this.btnDenuncias.Location = new System.Drawing.Point(3, 362);
+            this.btnDenuncias.Name = "btnDenuncias";
+            this.btnDenuncias.Size = new System.Drawing.Size(156, 46);
+            this.btnDenuncias.TabIndex = 9;
+            this.btnDenuncias.Text = "Denuncias";
+            this.btnDenuncias.UseVisualStyleBackColor = false;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.btnHistorialAccesos);
             this.panel3.Controls.Add(this.lblUsuario);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(159, 0);
@@ -319,6 +317,31 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(746, 61);
             this.panel3.TabIndex = 11;
+            // 
+            // btnHistorialAccesos
+            // 
+            this.btnHistorialAccesos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnHistorialAccesos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHistorialAccesos.ForeColor = System.Drawing.Color.White;
+            this.btnHistorialAccesos.Location = new System.Drawing.Point(361, 8);
+            this.btnHistorialAccesos.Name = "btnHistorialAccesos";
+            this.btnHistorialAccesos.Size = new System.Drawing.Size(159, 50);
+            this.btnHistorialAccesos.TabIndex = 11;
+            this.btnHistorialAccesos.Text = "Historial Accesos";
+            this.btnHistorialAccesos.UseVisualStyleBackColor = false;
+            // 
+            // btnCriterios
+            // 
+            this.btnCriterios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnCriterios.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCriterios.ForeColor = System.Drawing.Color.White;
+            this.btnCriterios.Location = new System.Drawing.Point(0, 16);
+            this.btnCriterios.Name = "btnCriterios";
+            this.btnCriterios.Size = new System.Drawing.Size(156, 42);
+            this.btnCriterios.TabIndex = 11;
+            this.btnCriterios.Text = "Criterios";
+            this.btnCriterios.UseVisualStyleBackColor = false;
+            this.btnCriterios.Click += new System.EventHandler(this.btnCriterios_Click);
             // 
             // frmPrincipal
             // 
@@ -359,8 +382,10 @@
         private System.Windows.Forms.Button btnUsuario;
         private System.Windows.Forms.Button btnFiscalizacion;
         private System.Windows.Forms.Button btnReporte;
-        private System.Windows.Forms.Button btnAsignar;
         private System.Windows.Forms.Button btnEstablecimiento;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button btnMisFiscalizaciones;
+        private System.Windows.Forms.Button btnHistorialAccesos;
+        private System.Windows.Forms.Button btnCriterios;
     }
 }

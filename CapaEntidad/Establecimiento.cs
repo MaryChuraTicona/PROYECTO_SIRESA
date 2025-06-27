@@ -20,5 +20,7 @@ namespace CapaEntidad
         public string EstadoSanitario { get; set; }
         public DateTime FechaRegistro { get; set; }
         public int UsuarioRegistroID { get; set; }
+        public string Correo { get; set; }
+
     }
 }

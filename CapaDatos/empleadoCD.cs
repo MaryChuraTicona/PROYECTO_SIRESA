@@ -158,6 +158,8 @@ namespace CapaDatos
 
         public Empleado ObtenerEmpleadoPorDNI(string dni)
         {
+            if (string.IsNullOrWhiteSpace(dni))
+                return null;
             Empleado emp = null;
 
             using (SqlConnection con = new Conexion().AbrirConexion())
@@ -199,6 +201,138 @@ namespace CapaDatos
             if (DateTime.Now < fechaNacimiento.AddYears(edad)) edad--;
             return edad;
         }
+
+        public List<Empleado> ListarEmpleadosActivos()
+        {
+            List<Empleado> lista = new List<Empleado>();
+
+            using (var conn = conexion.AbrirConexion())
+            {
+                string query = "SELECT EmpleadoID, NombreCompleto FROM EmpleadosRegistrados WHERE Activo = 1";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(new Empleado
+                    {
+                        EmpleadoID = Convert.ToInt32(dr["EmpleadoID"]),
+                        NombreCompleto = dr["NombreCompleto"].ToString()
+                    });
+                }
+            }
+
+            return lista;
+        }
+        public Empleado ObtenerEmpleadoPorUsuarioID(int empleadoID)
+        {
+            Empleado emp = null;
+
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = "SELECT * FROM EmpleadosRegistrados WHERE EmpleadoID = @empleadoID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@empleadoID", empleadoID);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    emp = new Empleado
+                    {
+                        EmpleadoID = Convert.ToInt32(dr["EmpleadoID"]),
+                        NombreCompleto = dr["NombreCompleto"].ToString(),
+                        DNI = dr["DNI"].ToString(),
+                        Especialidad = dr["Especialidad"].ToString(),
+                        RolID = Convert.ToInt32(dr["RolID"]),
+                        Correo = dr["Correo"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString()
+                    };
+                }
+            }
+
+            return emp;
+        }
+
+        public bool EmpleadoTieneFiscalizacion(int empleadoID, DateTime fecha)
+        {
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = @"
+            SELECT COUNT(*) 
+            FROM EquiposInspeccion ei
+            INNER JOIN Fiscalizaciones f ON ei.FiscalizacionID = f.FiscalizacionID
+            WHERE ei.EmpleadoID = @empleadoID AND CAST(f.FechaFiscalizacion AS DATE) = @fecha";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@empleadoID", empleadoID);
+                cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+        public int CantidadFiscalizacionesEnFecha(int empleadoID, DateTime fecha)
+        {
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = @"
+            SELECT COUNT(*) 
+            FROM EquiposInspeccion ei
+            INNER JOIN Fiscalizaciones f ON ei.FiscalizacionID = f.FiscalizacionID
+            WHERE ei.EmpleadoID = @empleadoID AND CAST(f.FechaFiscalizacion AS DATE) = @fecha";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@empleadoID", empleadoID);
+                cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+        public int ObtenerIDPorNombre(string nombreCompleto)
+        {
+            using (var conn = conexion.AbrirConexion())
+            {
+                string query = "SELECT EmpleadoID FROM EmpleadosRegistrados WHERE NombreCompleto = @nombre";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@nombre", nombreCompleto);
+
+                var result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : 0;
+            }
+        }
+
+        public Empleado ObtenerEmpleadoPorID(int empleadoID)
+        {
+            Empleado emp = null;
+
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = "SELECT * FROM EmpleadosRegistrados WHERE EmpleadoID = @empleadoID";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@empleadoID", empleadoID);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    emp = new Empleado
+                    {
+                        EmpleadoID = Convert.ToInt32(dr["EmpleadoID"]),
+                        NombreCompleto = dr["NombreCompleto"].ToString(),
+                        DNI = dr["DNI"].ToString(),
+                        Especialidad = dr["Especialidad"].ToString(),
+                        RolID = Convert.ToInt32(dr["RolID"]),
+                        Correo = dr["Correo"].ToString(),
+                        Telefono = dr["Telefono"].ToString(),
+                        Direccion = dr["Direccion"].ToString()
+                    };
+                }
+            }
+
+            return emp;
+        }
+
 
     }
 }

@@ -41,10 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cambioCD.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Conexion.cs" />
+    <Compile Include="criterioCD.cs" />
+    <Compile Include="denunciaCD.cs" />
     <Compile Include="empleadoCD.cs" />
+    <Compile Include="equipoCD.cs" />
     <Compile Include="establecimientoCD.cs" />
+    <Compile Include="fiscalizacionCD.cs" />
     <Compile Include="login_CD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rolCD.cs" />

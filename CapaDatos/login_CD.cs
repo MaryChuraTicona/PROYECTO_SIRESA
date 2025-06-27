@@ -20,7 +20,7 @@ namespace CapaDatos
             using (var conn = conexion.AbrirConexion())
             {
                 string query = @"
-            SELECT UsuarioID, NombreCompleto, Usuario, RolID, Activo 
+            SELECT UsuarioID, NombreCompleto, Usuario, RolID, Activo,DNI
             FROM Usuarios 
             WHERE Usuario = @usuario 
               AND ClaveHash = @claveHash 
@@ -40,7 +40,8 @@ namespace CapaDatos
                         NombreCompleto = dr["NombreCompleto"].ToString(),
                         UsuarioNombre = dr["Usuario"].ToString(),
                         RolID = (int)dr["RolID"],
-                        Activo = (bool)dr["Activo"]
+                        Activo = (bool)dr["Activo"],
+                        DNI = dr["DNI"].ToString()
                     };
                 }
             }

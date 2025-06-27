@@ -31,5 +31,9 @@ namespace CapaNegocios
         {
             return objDatos.CambiarEstadoUsuario(usuarioID, activo);
         }
+        public List<Usuario> ObtenerUsuariosActivos()
+        {
+            return new usuario_CD().ListarUsuarios().Where(u => u.Activo).ToList();
+        }
     }
 }
