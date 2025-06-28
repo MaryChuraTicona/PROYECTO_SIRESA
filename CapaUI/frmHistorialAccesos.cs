@@ -27,7 +27,7 @@ namespace CapaUI
         }
         private void CargarUsuarios()
         {
-            // Simula carga de usuarios desde la base de datos
+           
             List<Usuario> usuarios = new usuario_CN().ObtenerUsuariosActivos();
             cmbUsuarios.DisplayMember = "NombreCompleto";
             cmbUsuarios.ValueMember = "UsuarioID";

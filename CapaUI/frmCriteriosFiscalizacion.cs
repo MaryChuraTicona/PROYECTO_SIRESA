@@ -16,7 +16,7 @@ namespace CapaUI
     {
         private int fiscalizacionID;
         private criterioCN criterioCN = new criterioCN();
-        private List<CriterioEvaluado> criterios;
+        private List<CriterioBase> criterios;
         public frmCriteriosFiscalizacion(int fiscalizacionID)
         {
             InitializeComponent();
@@ -31,10 +31,11 @@ namespace CapaUI
             foreach (var c in criterios)
             {
                 int index = dgvCriterios.Rows.Add();
-                dgvCriterios.Rows[index].Cells["Numero"].Value = c.Numero;
-                dgvCriterios.Rows[index].Cells["Criterio"].Value = c.Criterio;
+                dgvCriterios.Rows[index].Cells["Numero"].Value = c.CriterioID.ToString();
+                dgvCriterios.Rows[index].Cells["Criterio"].Value = c.Nombre;
+
                 dgvCriterios.Rows[index].Cells["NivelRiesgo"].Value = c.NivelRiesgo;
-                dgvCriterios.Rows[index].Cells["Resultado"].Value = "NO"; // default
+                dgvCriterios.Rows[index].Cells["Resultado"].Value = "NO"; 
                 dgvCriterios.Rows[index].Cells["Observacion"].Value = "";
             }
         }

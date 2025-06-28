@@ -64,30 +64,29 @@ namespace CapaDatos
                 return cmd.ExecuteNonQuery() > 0;
             }
         }
-    
-    public List<CriterioEvaluado> ObtenerCriteriosPrecargados()
-        {
-            List<CriterioEvaluado> lista = new List<CriterioEvaluado>();
 
-            using (var conn = new Conexion().AbrirConexion())
+        public List<CriterioBase> ObtenerCriteriosPrecargados()
+        {
+            List<CriterioBase> lista = new List<CriterioBase>();
+            using (var conn = conexion.AbrirConexion())
             {
-                string query = "SELECT Numero, Criterio, NivelRiesgo FROM CriteriosEvaluados WHERE FiscalizacionID IS NULL";
+                string query = @"SELECT CriterioID, Nombre, NivelRiesgo , Activo
+                         FROM CriteriosBase
+                         WHERE Activo = 1"; 
+
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader dr = cmd.ExecuteReader();
-
                 while (dr.Read())
                 {
-                    lista.Add(new CriterioEvaluado
+                    lista.Add(new CriterioBase
                     {
-                        Numero = dr["Numero"].ToString(),
-                        Criterio = dr["Criterio"].ToString(),
+                        CriterioID = Convert.ToInt32(dr["CriterioID"]),
+                        Nombre = dr["Nombre"].ToString(),
                         NivelRiesgo = dr["NivelRiesgo"].ToString(),
-                        Resultado = "NO", // Por defecto
-                        Observacion = ""
+                        Activo = Convert.ToBoolean(dr["Activo"])
                     });
                 }
             }
-
             return lista;
         }
         public string RegistrarCriteriosEvaluados(List<CriterioEvaluado> lista)

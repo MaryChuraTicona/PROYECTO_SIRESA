@@ -2,6 +2,7 @@
 using CapaEntidad;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,26 @@ namespace CapaNegocios
         {
             return datos.ExisteRUC(ruc);
         }
+
+        public bool Inactivar(string ruc)
+        {
+            return datos.Inactivar(ruc);  
+        }
+        public List<Establecimiento> Listar(bool mostrarTodos)
+        {
+            return datos.Listar(mostrarTodos);
+        }
+
+        public bool Activar(string ruc)
+        {
+            return datos.Activar(ruc);
+        }
+
+        public Establecimiento ObtenerEstablecimientoPorID(int id)
+        {
+            return datos.ObtenerEstablecimientoPorID(id);
+        }
+
 
     }
 

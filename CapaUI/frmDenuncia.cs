@@ -27,27 +27,44 @@ namespace CapaUI
 
         private void frmDenuncia_Load(object sender, EventArgs e)
         {
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Dock = DockStyle.Fill;
+
+
             cmbEstadoFiltro.Items.AddRange(new string[] { "Todos", "Pendiente", "Atendida", "Rechazada" });
             cmbEstadoFiltro.SelectedIndex = 0;
-            CargarDenuncias("Todos");
+            
+            CargarDenuncias("Pendiente");
+            disenoDenuncia();
 
-            LimpiarDetalle();
+           
         }
-        private void CargarDenuncias(string estado)
+        public void CargarDenuncias(string estado)
         {
             dgvDenuncias.Rows.Clear();
             listaDenuncias = denunciaCN.ObtenerDenuncias(estado);
 
             foreach (var d in listaDenuncias)
             {
-                dgvDenuncias.Rows.Add(d.DenunciaID, d.DNI, d.Nombres, d.Correo, d.FechaRegistro, d.Estado);
+                dgvDenuncias.Rows.Add(
+            d.DenunciaID,
+            d.DNI,
+            d.Nombres,
+            d.Correo,
+            d.FechaRegistro,
+            d.Estado,
+            d.RUC,                         
+            d.NombreEstablecimiento,       
+            d.DireccionEstablecimiento       
+        );
             }
         }
 
         private void cmbEstadoFiltro_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarDenuncias(cmbEstadoFiltro.SelectedItem.ToString());
-            LimpiarDetalle();
+            
         }
 
         private void dgvDenuncias_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -59,75 +76,79 @@ namespace CapaUI
 
                 if (denunciaSeleccionada != null)
                 {
-                    lblDNI.Text = "DNI: " + denunciaSeleccionada.DNI;
-                    lblNombres.Text = "Nombres: " + denunciaSeleccionada.Nombres;
-                    lblCorreo.Text = "Correo: " + denunciaSeleccionada.Correo;
-                    lblRUC.Text = "RUC: " + denunciaSeleccionada.RUC;
-                    lblEstablecimiento.Text = "Establecimiento: " + denunciaSeleccionada.NombreEstablecimiento;
-                    lblDireccionEstablecimiento.Text = "Dirección: " + denunciaSeleccionada.DireccionEstablecimiento;
-
-                    txtDescripcion.Text = denunciaSeleccionada.Descripcion;
-                    txtRespuesta.Text = denunciaSeleccionada.Respuesta ?? "";
-
-                    if (File.Exists(denunciaSeleccionada.RutaImagen))
-                        picEvidencia.Image = Image.FromFile(denunciaSeleccionada.RutaImagen);
-                    else
-                        picEvidencia.Image = null;
-
-                    txtRespuesta.Enabled = denunciaSeleccionada.Estado == "Pendiente";
-                    btnGuardarRespuesta.Enabled = denunciaSeleccionada.Estado == "Pendiente";
+                    var detalle = new frmDetalleDenuncia(denunciaSeleccionada, usuarioActual);
+                    detalle.ShowDialog();
+                    CargarDenuncias(cmbEstadoFiltro.SelectedItem.ToString());
                 }
             }
         }
 
         private void btnGuardarRespuesta_Click(object sender, EventArgs e)
         {
-            if (denunciaSeleccionada == null)
-            {
-                MessageBox.Show("Seleccione una denuncia.");
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtRespuesta.Text))
-            {
-                MessageBox.Show("Ingrese una respuesta.");
-                return;
-            }
-
-            denunciaSeleccionada.Respuesta = txtRespuesta.Text;
-
-            string resultado = denunciaCN.ResponderDenuncia(
-            denunciaSeleccionada.DenunciaID,
-            usuarioActual.UsuarioID,
-            denunciaSeleccionada.Respuesta,
-            "Atendida"
-                     );
-
-
-            if (resultado == "ok")
-            {
-                MessageBox.Show("Respuesta guardada correctamente.");
-                CargarDenuncias(cmbEstadoFiltro.SelectedItem.ToString());
-                LimpiarDetalle();
-            }
-            else
-            {
-                MessageBox.Show("Error: " + resultado);
-            }
+           
         }
 
-        private void LimpiarDetalle()
+       
+        private void disenoDenuncia()
         {
-            lblDNI.Text = "DNI:";
-            lblNombres.Text = "Nombres:";
-            lblCorreo.Text = "Correo:";
-            lblRUC.Text = "RUC:";
-            lblEstablecimiento.Text = "Establecimiento:";
-            lblDireccionEstablecimiento.Text = "Dirección:";
-            txtDescripcion.Clear();
-            txtRespuesta.Clear();
-            picEvidencia.Image = null;
-            btnGuardarRespuesta.Enabled = false;
+            
+            this.Text = "Gestión de Denuncias";
+
+            Label lblTitulo = new Label();
+            lblTitulo.Text = "GESTIÓN DE DENUNCIAS";
+            lblTitulo.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.Maroon;
+            lblTitulo.AutoSize = true;
+            lblTitulo.Location = new Point(20, 20);
+            this.Controls.Add(lblTitulo);
+
+            
+            dgvDenuncias.EnableHeadersVisualStyles = false;
+            dgvDenuncias.ColumnHeadersDefaultCellStyle.BackColor = Color.Maroon;
+            dgvDenuncias.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvDenuncias.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            dgvDenuncias.DefaultCellStyle.SelectionBackColor = Color.LightSalmon;
+            dgvDenuncias.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvDenuncias.GridColor = Color.Maroon;
+            dgvDenuncias.BorderStyle = BorderStyle.Fixed3D;
+            dgvDenuncias.Size = new Size(1000, 400);
+            dgvDenuncias.BorderStyle = BorderStyle.Fixed3D;
+
+            cmbEstadoFiltro.Location = new Point(20, 80);
+            cmbEstadoFiltro.Width = 120;
+
+            
+            lblFiltro.Text = "Filtro:";
+            lblFiltro.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            lblFiltro.Location = new Point(850, 30);
+
+            lblFiltro.AutoSize = true;
+            this.Controls.Add(lblFiltro);
+
+          
+          
+
+           
         }
+
+        private void dgvDenuncias_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int id = Convert.ToInt32(dgvDenuncias.Rows[e.RowIndex].Cells[0].Value);
+                denunciaSeleccionada = listaDenuncias.FirstOrDefault(d => d.DenunciaID == id);
+
+                if (denunciaSeleccionada != null)
+                {
+                    var detalle = new frmDetalleDenuncia(denunciaSeleccionada, usuarioActual);
+                    detalle.ShowDialog();
+                    CargarDenuncias(cmbEstadoFiltro.SelectedItem.ToString());
+
+
+
+
+                }
+            }
+    }
     }
 }

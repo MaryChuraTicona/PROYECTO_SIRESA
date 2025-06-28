@@ -12,10 +12,13 @@ namespace CapaNegocios
     {
         private criterioCD criterioData = new criterioCD();
 
-        public List<CriterioEvaluado> ObtenerCriteriosPrecargados()
+     
+
+        public List<CriterioBase> ObtenerCriteriosPrecargados()
         {
             return criterioData.ObtenerCriteriosPrecargados();
         }
+
         public string RegistrarCriteriosEvaluados(List<CriterioEvaluado> lista)
         {
             return criterioData.RegistrarCriteriosEvaluados(lista);

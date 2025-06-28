@@ -47,12 +47,7 @@ namespace CapaUI
         }
 
 
-        private void frmUsuarios_Load(object sender, EventArgs e)
-        {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.TopLevel = false;
-            this.Dock = DockStyle.Fill;
-        }
+     
 
         private void btnCrear_Click(object sender, EventArgs e)
         {
@@ -261,6 +256,146 @@ namespace CapaUI
                 byte[] bytes = Encoding.UTF8.GetBytes(textoPlano);
                 return sha256.ComputeHash(bytes);
             }
+        }
+
+        private void frmUsuarios_Load(object sender, EventArgs e)
+        {
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
+
+            Label lblTitulo = new Label
+            {
+                Text = "Gestión de Usuarios",
+                Font = new Font("Segoe UI", 16, FontStyle.Bold),
+                ForeColor = Color.DarkRed,
+                Dock = DockStyle.Top,
+                Height = 40,
+                TextAlign = ContentAlignment.MiddleLeft,
+                Padding = new Padding(20, 0, 0, 0)
+            };
+            this.Controls.Add(lblTitulo);
+
+            // Nombre completo
+            label1.Text = "Nombre Completo:";
+            label1.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label1.Location = new Point(20, 60);
+            this.Controls.Add(label1);
+
+            txtNombreCompleto.Location = new Point(160, 58);
+            txtNombreCompleto.Width = 250;
+            this.Controls.Add(txtNombreCompleto);
+
+            // DNI
+            DNI.Text = "DNI:";
+            DNI.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            DNI.Location = new Point(450, 60);
+            this.Controls.Add(DNI);
+
+            txtDNI.Location = new Point(500, 58);
+            txtDNI.Width = 120;
+            this.Controls.Add(txtDNI);
+
+            // Correo
+            label2.Text = "Correo:";
+            label2.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label2.Location = new Point(20, 100);
+            this.Controls.Add(label2);
+
+            txtCorreo.Location = new Point(160, 98);
+            txtCorreo.Width = 250;
+            this.Controls.Add(txtCorreo);
+
+            // Teléfono
+            label4.Text = "Teléfono:";
+            label4.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label4.Location = new Point(450, 100);
+            this.Controls.Add(label4);
+
+            txtTelefono.Location = new Point(520, 98);
+            txtTelefono.Width = 120;
+            this.Controls.Add(txtTelefono);
+
+            // Dirección
+            label6.Text = "Dirección:";
+            label6.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label6.Location = new Point(20, 140);
+            this.Controls.Add(label6);
+
+            txtDireccion.Location = new Point(160, 138);
+            txtDireccion.Width = 480;
+            this.Controls.Add(txtDireccion);
+
+            // Usuario
+            label3.Text = "Usuario:";
+            label3.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label3.Location = new Point(20, 180);
+            this.Controls.Add(label3);
+
+            txtUsuario.Location = new Point(160, 178);
+            txtUsuario.Width = 150;
+            this.Controls.Add(txtUsuario);
+
+            // Clave
+            label5.Text = "Clave:";
+            label5.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label5.Location = new Point(350, 180);
+            this.Controls.Add(label5);
+
+            txtClave.Location = new Point(400, 178);
+            txtClave.Width = 150;
+            this.Controls.Add(txtClave);
+
+            Label lblRol = new Label
+            {
+                Text = "Rol:",
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Location = new Point(20, 220),
+                AutoSize = true
+            };
+            this.Controls.Add(lblRol);
+
+            cmbRol.Location = new Point(160, 218);
+            cmbRol.Width = 180;
+            this.Controls.Add(cmbRol);
+
+            // Activo
+            chkActivo.Text = "Activo";
+            chkActivo.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            chkActivo.Location = new Point(400, 220);
+            this.Controls.Add(chkActivo);
+
+            // Botones
+            btnCrear.Text = "Crear";
+            btnCrear.BackColor = Color.DarkRed;
+            btnCrear.ForeColor = Color.White;
+            btnCrear.Size = new Size(120, 40);
+            btnCrear.Location = new Point(20, 270);
+            this.Controls.Add(btnCrear);
+
+            btnEditar.Text = "Editar";
+            btnEditar.BackColor = Color.Gray;
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Size = new Size(120, 40);
+            btnEditar.Location = new Point(160, 270);
+            this.Controls.Add(btnEditar);
+
+            // DataGrid
+            dgvUsuarios.Location = new Point(20, 330);
+            dgvUsuarios.Size = new Size(900, 300);
+            dgvUsuarios.BackgroundColor = Color.White;
+            dgvUsuarios.GridColor = Color.DarkRed;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvUsuarios.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvUsuarios.EnableHeadersVisualStyles = false;
+            dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.Controls.Add(dgvUsuarios);
+
+            // Ajustes de formulario
+            this.BackColor = Color.WhiteSmoke;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
         }
     }
 }

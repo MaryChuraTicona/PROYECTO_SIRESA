@@ -26,9 +26,18 @@ namespace CapaUI
         private VideoCaptureDevice webcam;
         private Bitmap imagenCapturada;
         private string rutaImagenFinal = "";
+        private frmDenuncia formularioPadre;
+        public frmDenunciaPublica(frmDenuncia padre)
+        {
+            InitializeComponent();
+            formularioPadre = padre;
+            IniciarCamara();
+        }
+
         public frmDenunciaPublica()
         {
             InitializeComponent();
+            formularioPadre = null;
             IniciarCamara();
         }
         private void IniciarCamara()
@@ -89,6 +98,7 @@ namespace CapaUI
                 }
             }
         }
+
         private void frmDenunciaPublica_Load(object sender, EventArgs e)
         {
 
@@ -139,6 +149,7 @@ namespace CapaUI
             if (respuesta == "ok")
             {
                 MessageBox.Show("Denuncia registrada exitosamente.");
+                formularioPadre?.CargarDenuncias("Pendiente");
                 if (webcam != null && webcam.IsRunning)
                     webcam.SignalToStop();
                 this.Close();
@@ -164,8 +175,8 @@ namespace CapaUI
         }
         private async Task AutocompletarDatosSUNAT(string ruc)
         {
-            string url = $"https://api.apis.net.pe/v1/ruc?numero={ruc}";
-            string token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im1hcnlsdXouMjN1cHRAZ21haWwuY29tIn0.2CJRJ4c4S1LUqsXSvqShTl7x2c5QsVirOlKGdaEcaFk";
+            string url = $"https://api.apis.net.pe/v2/sunat/ruc?numero={ruc}";
+            string token = "Bearer apis-token-16368.3SUpi4VCNbmVKiuEPOcueOywc4hyIVBP";
 
             using (HttpClient client = new HttpClient())
             {
@@ -194,5 +205,13 @@ namespace CapaUI
             }
         }
 
+
+        private async void txtDNI_Leave_1(object sender, EventArgs e)
+        {
+            if (txtDNI.Text.Length == 8)
+            {
+                await AutocompletarDatosRENIEC(txtDNI.Text);
+            }
+        }
     }
 }

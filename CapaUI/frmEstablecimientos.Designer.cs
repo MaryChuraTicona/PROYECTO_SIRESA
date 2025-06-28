@@ -57,6 +57,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
+            this.chkMostrarInactivos = new System.Windows.Forms.CheckBox();
+            this.btnActivar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstablecimientos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -236,6 +239,7 @@
             this.btnInactivar.TabIndex = 24;
             this.btnInactivar.Text = "Inactivar";
             this.btnInactivar.UseVisualStyleBackColor = true;
+            this.btnInactivar.Click += new System.EventHandler(this.btnInactivar_Click);
             // 
             // txtRUC
             // 
@@ -303,11 +307,44 @@
             this.label13.TabIndex = 28;
             this.label13.Text = "Departamento";
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.Location = new System.Drawing.Point(29, 9);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(135, 13);
+            this.lblTitulo.TabIndex = 34;
+            this.lblTitulo.Text = "Gestion de Establecimiento";
+            // 
+            // chkMostrarInactivos
+            // 
+            this.chkMostrarInactivos.AutoSize = true;
+            this.chkMostrarInactivos.Location = new System.Drawing.Point(649, 216);
+            this.chkMostrarInactivos.Name = "chkMostrarInactivos";
+            this.chkMostrarInactivos.Size = new System.Drawing.Size(80, 17);
+            this.chkMostrarInactivos.TabIndex = 35;
+            this.chkMostrarInactivos.Text = "checkBox1";
+            this.chkMostrarInactivos.UseVisualStyleBackColor = true;
+            this.chkMostrarInactivos.CheckedChanged += new System.EventHandler(this.chkMostrarInactivos_CheckedChanged);
+            // 
+            // btnActivar
+            // 
+            this.btnActivar.Location = new System.Drawing.Point(489, 212);
+            this.btnActivar.Name = "btnActivar";
+            this.btnActivar.Size = new System.Drawing.Size(75, 23);
+            this.btnActivar.TabIndex = 36;
+            this.btnActivar.Text = "Activar";
+            this.btnActivar.UseVisualStyleBackColor = true;
+            this.btnActivar.Click += new System.EventHandler(this.btnActivar_Click);
+            // 
             // frmEstablecimientos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnActivar);
+            this.Controls.Add(this.chkMostrarInactivos);
+            this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.txtDistrito);
             this.Controls.Add(this.txtProvincia);
             this.Controls.Add(this.txtDepartamento);
@@ -377,5 +414,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.CheckBox chkMostrarInactivos;
+        private System.Windows.Forms.Button btnActivar;
     }
 }

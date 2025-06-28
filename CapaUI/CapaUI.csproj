@@ -99,6 +99,12 @@
     <Compile Include="frmDenunciaPublica.Designer.cs">
       <DependentUpon>frmDenunciaPublica.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDetalleDenuncia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDetalleDenuncia.Designer.cs">
+      <DependentUpon>frmDetalleDenuncia.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDetalleFiscalizacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDenunciaPublica.resx">
       <DependentUpon>frmDenunciaPublica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDetalleDenuncia.resx">
+      <DependentUpon>frmDetalleDenuncia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmDetalleFiscalizacion.resx">
       <DependentUpon>frmDetalleFiscalizacion.cs</DependentUpon>

@@ -233,6 +233,28 @@ namespace CapaDatos
             }
         }
 
+        public bool ExisteFiscalizacionEnFecha(int establecimientoID, DateTime fecha)
+        {
+            using (var conn = conexion.AbrirConexion())
+            {
+                string query = @"SELECT COUNT(*) 
+                         FROM Fiscalizaciones
+                         WHERE EstablecimientoID = @establecimientoID
+                           AND CAST(FechaFiscalizacion AS DATE) = @fecha
+                           AND EstadoFiscalizacion <> 'Cancelada'";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@establecimientoID", establecimientoID);
+                cmd.Parameters.AddWithValue("@fecha", fecha.Date);
+
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+        }
+
+
+
+
     }
 }
 

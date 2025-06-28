@@ -23,70 +23,86 @@ namespace CapaUI
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            lblUsuario.Text = "Bienvenido: " + usuarioActual.NombreCompleto;
             this.IsMdiContainer = true;
-            MessageBox.Show("RolID actual: " + usuarioActual.RolID);
+            this.WindowState = FormWindowState.Maximized;
+
+            lblUsuario.Text = $"Bienvenido: {usuarioActual.NombreCompleto} | Rol: {ObtenerNombreRol(usuarioActual.RolID)} | {DateTime.Now:dd/MM/yyyy HH:mm}";
+            lblUsuario.ForeColor = Color.FromArgb(192, 0, 0);
+            lblUsuario.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblUsuario.TextAlign = ContentAlignment.MiddleCenter;
+            panel3.BackColor = Color.LightGray;
+
+            panel1.BackColor = Color.FromArgb(192, 0, 0);
+            foreach (var b in panel1.Controls.OfType<Button>())
+            {
+                b.FlatStyle = FlatStyle.Flat;
+                b.FlatAppearance.BorderSize = 0;
+                b.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            }
+
+            var listaBotones = new List<Button> {
+        btnEmpleado, btnUsuario, btnEstablecimiento, btnCriterios, btnFiscalizacion,
+        btnMisFiscalizaciones, btnReporte, btnDenuncia, btnHistorialAccesos, btnCerrar
+    };
+
+            foreach (var b in listaBotones)
+                b.Visible = false;
 
 
-            btnEmpleados.Visible = false;
-            btnUsuarios.Visible = false;
-            btnEstablecimientos.Visible = false;
-            btnFiscalizaciones.Visible = false;
-            btnReportes.Visible = false;
-            btnDenuncias.Visible = false;
 
-            btnEmpleado.Visible = false;
-            btnUsuario.Visible = false;
-            btnEstablecimiento.Visible = false;
-            btnFiscalizacion.Visible = false;
-            btnReporte.Visible = false;
-            btnDenuncia.Visible = false;
-            btnCerrar.Visible = true; // Siempre debe estar visible
-            btnMisFiscalizaciones.Visible = false;
-
-            // Activar según Rol
             switch (usuarioActual.RolID)
             {
                 case 1: // Administrador
-                    btnEmpleados.Visible = true;
-                    btnUsuarios.Visible = true;
-                    btnEstablecimientos.Visible = true;
-                    btnFiscalizaciones.Visible = true;
-                    btnReportes.Visible = true;
-                    btnDenuncias.Visible = true;
-
                     btnEmpleado.Visible = true;
                     btnUsuario.Visible = true;
                     btnEstablecimiento.Visible = true;
+                    btnCriterios.Visible = true;
                     btnFiscalizacion.Visible = true;
                     btnReporte.Visible = true;
                     btnDenuncia.Visible = true;
+                    btnHistorialAccesos.Visible = true;
                     break;
 
-                case 2: // Inspector
+                case 2: 
                     btnMisFiscalizaciones.Visible = true;
-                    btnDenuncia.Visible = true;
+                    
                     break;
 
-                case 3: // Supervisor
-                    btnEstablecimientos.Visible = true;
-                    btnFiscalizaciones.Visible = true;
-                    btnReportes.Visible = true;
-                    btnDenuncias.Visible = true;
-
-                    btnEstablecimiento.Visible = true;
+                case 3: 
                     btnFiscalizacion.Visible = true;
                     btnReporte.Visible = true;
                     btnDenuncia.Visible = true;
                     break;
 
-                case 4: // Ciudadano
-                    btnDenuncia.Visible = true;
-                    break;
-
-            }
+                
             }
 
+            btnCerrar.Visible = true;
+
+
+            int posY = 80;
+            int separacion = 5;
+
+            foreach (var b in listaBotones.Where(x => x.Visible))
+            {
+                b.Top = posY;
+                posY += b.Height + separacion;
+            }
+
+            MessageBox.Show($"Bienvenido {usuarioActual.NombreCompleto} como {ObtenerNombreRol(usuarioActual.RolID)}");
+        }
+
+        private string ObtenerNombreRol(int rolID)
+        {
+            switch (rolID)
+            {
+                case 1: return "Administrador";
+                case 2: return "Inspector";
+                case 3: return "Supervisor";
+                case 4: return "Ciudadano";
+                default: return "Desconocido";
+            }
+        }
 
         private void AbrirFormulario(Form formHijo)
         {
@@ -168,9 +184,12 @@ namespace CapaUI
 
         private void btnCriterios_Click(object sender, EventArgs e)
         {
-            frmCriterioBase frm = new frmCriterioBase();
-            frm.MdiParent = this;
-            frm.Show();
+            MostrarFormulario(new frmCriterioBase());
+        }
+
+        private void btnHistorialAccesos_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

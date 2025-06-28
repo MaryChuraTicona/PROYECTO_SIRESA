@@ -55,5 +55,11 @@ namespace CapaNegocios
             return fiscalCD.MarcarFiscalizacionComoFinalizada(id);
         }
 
+        public bool ExisteFiscalizacionEnFecha(int establecimientoID, DateTime fecha)
+        {
+            return fiscalCD.ExisteFiscalizacionEnFecha(establecimientoID, fecha);
+        }
+
+
     }
 }

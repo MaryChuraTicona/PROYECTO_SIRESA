@@ -27,14 +27,19 @@ namespace CapaUI
 
         private void frmMisInspecciones_Load(object sender, EventArgs e)
         {
+            this.Dock = DockStyle.Fill;
+            this.WindowState = FormWindowState.Maximized;
+
+            disenoMisInspeciones();
+          
+
             lblTitulo.Text = "Mis inspecciones asignadas";
 
             cmbFiltro.Items.AddRange(new string[] { "Todos", "Pendiente", "Programado", "Finalizado" });
             cmbFiltro.SelectedIndex = 0;
 
             Empleado emp = empCN.BuscarEmpleadoPorDNI(usuarioActual.DNI);
-            MessageBox.Show("DNI del usuario actual: " + usuarioActual.DNI);
-
+           
 
 
             if (emp != null)
@@ -123,6 +128,25 @@ namespace CapaUI
                 }
             }
         }
+
+        private void disenoMisInspeciones() { 
+
+                lblTitulo.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+                lblTitulo.ForeColor = Color.Maroon;
+                this.BackColor = Color.WhiteSmoke;  
+
+                dgvMisInspecciones.EnableHeadersVisualStyles = false;
+                dgvMisInspecciones.ColumnHeadersDefaultCellStyle.BackColor = Color.Maroon;
+                dgvMisInspecciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dgvMisInspecciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+                dgvMisInspecciones.DefaultCellStyle.SelectionBackColor = Color.LightSalmon;
+                dgvMisInspecciones.DefaultCellStyle.SelectionForeColor = Color.Black;
+                dgvMisInspecciones.GridColor = Color.Maroon;
+                dgvMisInspecciones.BorderStyle = BorderStyle.Fixed3D;
+                dgvMisInspecciones.RowHeadersVisible = false;
+                dgvMisInspecciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
+       
     }
-    
-}

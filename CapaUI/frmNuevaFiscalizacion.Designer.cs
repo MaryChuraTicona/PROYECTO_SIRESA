@@ -30,21 +30,21 @@
         {
             this.btnGuardar = new System.Windows.Forms.Button();
             this.cmbEstablecimiento = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblEstablecimiento = new System.Windows.Forms.Label();
+            this.lblTipo = new System.Windows.Forms.Label();
             this.cmbTipo = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
+            this.lblObservaciones = new System.Windows.Forms.Label();
             this.chkNotificado = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblFechaNotif = new System.Windows.Forms.Label();
             this.dtpFechaFiscalizacion = new System.Windows.Forms.DateTimePicker();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
             this.dtpNotificacion = new System.Windows.Forms.DateTimePicker();
             this.dgvEquipo = new System.Windows.Forms.DataGridView();
             this.btnAgregarInspector = new System.Windows.Forms.Button();
             this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblRol = new System.Windows.Forms.Label();
+            this.lblEmpleado = new System.Windows.Forms.Label();
             this.cmbEmpleado = new System.Windows.Forms.ComboBox();
             this.btnQuitarInspector = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEquipo)).BeginInit();
@@ -68,23 +68,23 @@
             this.cmbEstablecimiento.Size = new System.Drawing.Size(121, 21);
             this.cmbEstablecimiento.TabIndex = 1;
             // 
-            // label1
+            // lblEstablecimiento
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(43, 36);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Establecimeinto";
+            this.lblEstablecimiento.AutoSize = true;
+            this.lblEstablecimiento.Location = new System.Drawing.Point(43, 36);
+            this.lblEstablecimiento.Name = "lblEstablecimiento";
+            this.lblEstablecimiento.Size = new System.Drawing.Size(81, 13);
+            this.lblEstablecimiento.TabIndex = 2;
+            this.lblEstablecimiento.Text = "Establecimeinto";
             // 
-            // label2
+            // lblTipo
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(28, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Tipo";
+            this.lblTipo.AutoSize = true;
+            this.lblTipo.Location = new System.Drawing.Point(43, 63);
+            this.lblTipo.Name = "lblTipo";
+            this.lblTipo.Size = new System.Drawing.Size(28, 13);
+            this.lblTipo.TabIndex = 4;
+            this.lblTipo.Text = "Tipo";
             // 
             // cmbTipo
             // 
@@ -94,23 +94,23 @@
             this.cmbTipo.Size = new System.Drawing.Size(121, 21);
             this.cmbTipo.TabIndex = 3;
             // 
-            // label3
+            // lblFecha
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 95);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Fecha de fiscalizacion";
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(43, 95);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(112, 13);
+            this.lblFecha.TabIndex = 5;
+            this.lblFecha.Text = "Fecha de fiscalizacion";
             // 
-            // label4
+            // lblObservaciones
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 131);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Observaciones";
+            this.lblObservaciones.AutoSize = true;
+            this.lblObservaciones.Location = new System.Drawing.Point(43, 131);
+            this.lblObservaciones.Name = "lblObservaciones";
+            this.lblObservaciones.Size = new System.Drawing.Size(78, 13);
+            this.lblObservaciones.TabIndex = 6;
+            this.lblObservaciones.Text = "Observaciones";
             // 
             // chkNotificado
             // 
@@ -122,14 +122,14 @@
             this.chkNotificado.Text = "Notificado";
             this.chkNotificado.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // lblFechaNotif
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(74, 206);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Notificacion";
+            this.lblFechaNotif.AutoSize = true;
+            this.lblFechaNotif.Location = new System.Drawing.Point(74, 206);
+            this.lblFechaNotif.Name = "lblFechaNotif";
+            this.lblFechaNotif.Size = new System.Drawing.Size(63, 13);
+            this.lblFechaNotif.TabIndex = 8;
+            this.lblFechaNotif.Text = "Notificacion";
             // 
             // dtpFechaFiscalizacion
             // 
@@ -179,23 +179,23 @@
             this.cmbRol.Size = new System.Drawing.Size(121, 21);
             this.cmbRol.TabIndex = 18;
             // 
-            // label6
+            // lblRol
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(380, 161);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Rol";
+            this.lblRol.AutoSize = true;
+            this.lblRol.Location = new System.Drawing.Point(380, 161);
+            this.lblRol.Name = "lblRol";
+            this.lblRol.Size = new System.Drawing.Size(23, 13);
+            this.lblRol.TabIndex = 17;
+            this.lblRol.Text = "Rol";
             // 
-            // label8
+            // lblEmpleado
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(385, 99);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(59, 13);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "Empleados";
+            this.lblEmpleado.AutoSize = true;
+            this.lblEmpleado.Location = new System.Drawing.Point(385, 99);
+            this.lblEmpleado.Name = "lblEmpleado";
+            this.lblEmpleado.Size = new System.Drawing.Size(59, 13);
+            this.lblEmpleado.TabIndex = 15;
+            this.lblEmpleado.Text = "Empleados";
             // 
             // cmbEmpleado
             // 
@@ -224,19 +224,19 @@
             this.Controls.Add(this.dgvEquipo);
             this.Controls.Add(this.btnAgregarInspector);
             this.Controls.Add(this.cmbRol);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblRol);
+            this.Controls.Add(this.lblEmpleado);
             this.Controls.Add(this.cmbEmpleado);
             this.Controls.Add(this.dtpNotificacion);
             this.Controls.Add(this.txtObservaciones);
             this.Controls.Add(this.dtpFechaFiscalizacion);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblFechaNotif);
             this.Controls.Add(this.chkNotificado);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblObservaciones);
+            this.Controls.Add(this.lblFecha);
+            this.Controls.Add(this.lblTipo);
             this.Controls.Add(this.cmbTipo);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEstablecimiento);
             this.Controls.Add(this.cmbEstablecimiento);
             this.Controls.Add(this.btnGuardar);
             this.Name = "frmNuevaFiscalizacion";
@@ -252,21 +252,21 @@
 
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.ComboBox cmbEstablecimiento;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEstablecimiento;
+        private System.Windows.Forms.Label lblTipo;
         private System.Windows.Forms.ComboBox cmbTipo;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblFecha;
+        private System.Windows.Forms.Label lblObservaciones;
         private System.Windows.Forms.CheckBox chkNotificado;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFechaNotif;
         private System.Windows.Forms.DateTimePicker dtpFechaFiscalizacion;
         private System.Windows.Forms.TextBox txtObservaciones;
         private System.Windows.Forms.DateTimePicker dtpNotificacion;
         private System.Windows.Forms.DataGridView dgvEquipo;
         private System.Windows.Forms.Button btnAgregarInspector;
         private System.Windows.Forms.ComboBox cmbRol;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblRol;
+        private System.Windows.Forms.Label lblEmpleado;
         private System.Windows.Forms.ComboBox cmbEmpleado;
         private System.Windows.Forms.Button btnQuitarInspector;
     }

@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,6 +29,11 @@ namespace CapaUI
             ListarEmpleados();
             dtpFechaNacimiento.MaxDate = DateTime.Today;
             txtEdad.ReadOnly = true;
+            diseno();
+
+
+
+
         }
 
         private void CargarCargos()
@@ -82,7 +88,7 @@ namespace CapaUI
             if (!ValidarCampos()) return;
             var lista = empleadoCN.ObtenerEmpleados();
             bool dniDuplicado = lista.Any(empleado =>
-     empleado.DNI == txtDNI.Text &&
+     empleado.DNI == DNI.Text &&
      (!idEmpleadoSeleccionado.HasValue || empleado.EmpleadoID != idEmpleadoSeleccionado.Value));
 
 
@@ -95,7 +101,7 @@ namespace CapaUI
 
             Empleado emp = new Empleado
             {
-                DNI = txtDNI.Text,
+                DNI = DNI.Text,
                 NombreCompleto = txtNombreCompleto.Text,
                 Especialidad = txtEspecialidad.Text,
                 FechaNacimiento = dtpFechaNacimiento.Value,
@@ -113,8 +119,8 @@ namespace CapaUI
             {
                 string resultado = empleadoCN.RegistrarEmpleado(emp);
                 MessageBox.Show(resultado, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ListarEmpleados(); // actualiza grilla o lista
-                LimpiarCampos();   // limpia los textbox, datepickers, etc.
+                ListarEmpleados(); 
+                LimpiarCampos();   
             }
             catch (Exception ex)
             {
@@ -145,7 +151,7 @@ namespace CapaUI
                 esNuevo = false;
                 idEmpleadoSeleccionado = (int)dgvEmpleados.CurrentRow.Cells["EmpleadoID"].Value;
 
-                txtDNI.Text = dgvEmpleados.CurrentRow.Cells["DNI"].Value.ToString();
+                DNI.Text = dgvEmpleados.CurrentRow.Cells["DNI"].Value.ToString();
                 txtNombreCompleto.Text = dgvEmpleados.CurrentRow.Cells["NombreCompleto"].Value.ToString();
                 txtEspecialidad.Text = dgvEmpleados.CurrentRow.Cells["Especialidad"].Value.ToString();
                 txtCorreo.Text = dgvEmpleados.CurrentRow.Cells["Correo"].Value.ToString();
@@ -177,7 +183,7 @@ namespace CapaUI
 
         private void LimpiarCampos()
         {
-            txtDNI.Clear();
+            DNI.Clear();
             txtNombreCompleto.Clear();
             txtEspecialidad.Clear();
             txtCorreo.Clear();
@@ -195,7 +201,7 @@ namespace CapaUI
 
         private bool ValidarCampos()
         {
-            if (txtDNI.Text.Length != 8)
+            if (DNI.Text.Length != 8)
             {
                 MessageBox.Show("DNI inválido");
                 return false;
@@ -215,9 +221,9 @@ namespace CapaUI
 
         private async void txtDNI_Leave(object sender, EventArgs e)
         {
-            if (txtDNI.Text.Length == 8)
+            if (DNI.Text.Length == 8)
             {
-                var datos = await empleadoCN.ConsultarRENIECAsync(txtDNI.Text);
+                var datos = await empleadoCN.ConsultarRENIECAsync(DNI.Text);
                 if (datos != null)
                 {
                     txtNombreCompleto.Text = datos.NombreCompleto;
@@ -238,7 +244,7 @@ namespace CapaUI
 
             if (edad < 18)
             {
-                MessageBox.Show("Solo se permite registrar empleados mayores de 18 años.", "Edad inválida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
                 txtEdad.Clear();
                 
             }
@@ -246,9 +252,137 @@ namespace CapaUI
 
         private void frmEmpleados_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.WhiteSmoke;
+
+
+
+        }
+
+        private void diseno()
+        {
+
+            lblTitulo.Text = "Gestión de Empleados";
+            lblTitulo.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.DarkRed;
+            lblTitulo.Location = new Point(20, 10);
+
+            // DNI
+            lblDNI.Text = "DNI:";
+            lblDNI.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            DNI.Location = new Point(80, 60);
+            lblDNI.Location = new Point(20, 58);
+            DNI.Width = 150;
+
+            // Nombre completo
+            label1.Text = "Nombre Completo:";
+            label1.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label1.Location = new Point(250, 60);
+            txtNombreCompleto.Location = new Point(400, 58);
+            txtNombreCompleto.Width = 250;
+
+            // Fecha nacimiento
+            label5.Text = "Fecha de Nacimiento:";
+            label5.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label5.Location = new Point(20, 100);
+            dtpFechaNacimiento.Location = new Point(180, 98);
+            dtpFechaNacimiento.Width = 180;
+
+            // Edad
+            label6.Text = "Edad:";
+            label6.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label6.Location = new Point(380, 100);
+            txtEdad.Location = new Point(430, 98);
+            txtEdad.Width = 50;
+
+            // Correo
+            label7.Text = "Correo:";
+            label7.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label7.Location = new Point(20, 140);
+            txtCorreo.Location = new Point(90, 138);
+            txtCorreo.Width = 250;
+
+            // Teléfono
+            label8.Text = "Teléfono:";
+            label8.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label8.Location = new Point(360, 140);
+            txtTelefono.Location = new Point(440, 138);
+            txtTelefono.Width = 150;
+
+            // Dirección
+            label9.Text = "Dirección:";
+            label9.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label9.Location = new Point(20, 180);
+            txtDireccion.Location = new Point(100, 178);
+            txtDireccion.Width = 300;
+
+            // Especialidad
+            label4.Text = "Especialidad:";
+            label4.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label4.Location = new Point(420, 180);
+            txtEspecialidad.Location = new Point(520, 178);
+            txtEspecialidad.Width = 150;
+
+            // Rol
+            label2.Text = "Rol:";
+            label2.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label2.Location = new Point(20, 220);
+            cmbCargo.Location = new Point(60, 218);
+            cmbCargo.Width = 150;
+
+            // Supervisor
+            label3.Text = "Supervisor:";
+            label3.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label3.Location = new Point(230, 220);
+            cmbSupervisor.Location = new Point(320, 218);
+            cmbSupervisor.Width = 200;
+
+            // Activo
+            chkActivo.Text = "Activo";
+            chkActivo.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            chkActivo.Location = new Point(540, 220);
+
+
+
+
+
+            btnGuardar.Text = "Guardar";
+            btnGuardar.Size = new Size(120, 40);
+            btnGuardar.BackColor = Color.DarkRed;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(20, 270);
+            this.Controls.Add(btnGuardar);
+
+            btnNuevo.Text = "Nuevo";
+            btnNuevo.Size = new Size(120, 40);
+            btnNuevo.BackColor = Color.Gray;
+            btnNuevo.ForeColor = Color.White;
+            btnNuevo.Location = new Point(160, 270);
+            this.Controls.Add(btnNuevo);
+
+            btnEditar.Text = "Editar";
+            btnEditar.Size = new Size(120, 40);
+            btnEditar.BackColor = Color.Gray;
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(300, 270);
+            this.Controls.Add(btnEditar);
+
+
+            dgvEmpleados.Location = new Point(20, 330);
+            dgvEmpleados.Size = new Size(1240,350);
+            dgvEmpleados.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvEmpleados.BackgroundColor = Color.White;
+            dgvEmpleados.GridColor = Color.DarkRed;
+            dgvEmpleados.EnableHeadersVisualStyles = false;
+            dgvEmpleados.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvEmpleados.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.Controls.Add(dgvEmpleados);
+
+            // --- FORMULARIO MDI HIJO CONFIGURADO ---
             this.FormBorderStyle = FormBorderStyle.None;
             this.TopLevel = false;
             this.Dock = DockStyle.Fill;
+            this.BackColor = Color.WhiteSmoke;
 
         }
     }

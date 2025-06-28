@@ -63,7 +63,7 @@ namespace CapaUI
             cmbEstadoFiltro.SelectedIndex = 0;
             cmbEstadoFiltro.SelectedIndexChanged += cmbEstadoFiltro_SelectedIndexChanged;
 
-            MessageBox.Show("Formulario CARGADO correctamente.");
+            DisenoFiscalizaciones();
         }
 
         private void btnNuevaFiscalizacion_Click(object sender, EventArgs e)
@@ -174,5 +174,65 @@ namespace CapaUI
                 });
             }
         }
+
+        private void DisenoFiscalizaciones()
+        {
+            // Título
+            Label lblTitulo = new Label();
+            lblTitulo.Text = "Gestión de Fiscalizaciones";
+            lblTitulo.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.DarkRed;
+            lblTitulo.Dock = DockStyle.Top;
+            lblTitulo.Height = 40;
+            lblTitulo.TextAlign = ContentAlignment.MiddleLeft;
+            lblTitulo.Padding = new Padding(20, 0, 0, 0);
+            this.Controls.Add(lblTitulo);
+
+            this.BackColor = Color.WhiteSmoke;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
+
+            // Buscar
+            label2.Text = "Buscar:";
+            label2.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label2.Location = new Point(30, 60);
+
+            txtBuscar.Location = new Point(100, 58);
+            txtBuscar.Width = 250;
+
+            // Filtro estado
+            cmbEstadoFiltro.Location = new Point(370, 58);
+            cmbEstadoFiltro.Width = 150;
+
+            // Botón Nueva
+            btnNuevaFiscalizacion.Text = "Nueva";
+            btnNuevaFiscalizacion.Size = new Size(120, 40);
+            btnNuevaFiscalizacion.BackColor = Color.DarkRed;
+            btnNuevaFiscalizacion.ForeColor = Color.White;
+            btnNuevaFiscalizacion.FlatStyle = FlatStyle.Flat;
+            btnNuevaFiscalizacion.Location = new Point(550, 55);
+
+            // DataGrid
+            dgvFiscalizaciones.Location = new Point(30, 120);
+            dgvFiscalizaciones.Width = this.ClientSize.Width - 60;
+            dgvFiscalizaciones.Height = this.ClientSize.Height - 180;
+            dgvFiscalizaciones.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+            dgvFiscalizaciones.BackgroundColor = Color.White;
+            dgvFiscalizaciones.GridColor = Color.DarkRed;
+            dgvFiscalizaciones.EnableHeadersVisualStyles = false;
+            dgvFiscalizaciones.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvFiscalizaciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvFiscalizaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // Ajustes de columnas manuales
+            if (dgvFiscalizaciones.Columns["FiscalizacionID"] != null)
+                dgvFiscalizaciones.Columns["FiscalizacionID"].Width = 50;
+
+            if (dgvFiscalizaciones.Columns["NombreEstablecimiento"] != null)
+                dgvFiscalizaciones.Columns["NombreEstablecimiento"].Width = 300;
+
+        }
+
     }
 }

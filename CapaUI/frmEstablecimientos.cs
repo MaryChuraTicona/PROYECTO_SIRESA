@@ -13,11 +13,9 @@ using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
 
-
-
-
 using CapaEntidad;
 using System.IO;
+using System.Reflection.Emit;
 
 namespace CapaUI
 {
@@ -29,6 +27,7 @@ namespace CapaUI
         {
             InitializeComponent();
             usuarioActualID = usuarioID;
+            diseno();
         }
 
         private async void txtRUC_Leave(object sender, EventArgs e)
@@ -86,6 +85,7 @@ namespace CapaUI
             cmbEstadoSanitario.Items.AddRange(new[] { "Bueno", "Regular", "Deficiente" });
             cmbTipoNegocio.Items.AddRange(new[] { "Restaurante", "Bodega", "Farmacia", "Otro" });
             CargarEstablecimientos();
+            CargarEstablecimientoss(false);
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.TopLevel = false;
@@ -133,7 +133,7 @@ namespace CapaUI
                 TipoNegocio = cmbTipoNegocio.Text,
                 EstadoSanitario = cmbEstadoSanitario.Text,
                 FechaRegistro = DateTime.Now,
-                UsuarioRegistroID = usuarioActualID // este ID debe llegarte del frmPrincipal
+                UsuarioRegistroID = usuarioActualID 
             };
 
             bool registrado = establecimientoCN.Registrar(est);
@@ -142,7 +142,7 @@ namespace CapaUI
             {
                 MessageBox.Show("Establecimiento registrado correctamente.");
                 LimpiarCampos();
-                CargarEstablecimientos(); // Recarga el DataGridView
+                CargarEstablecimientos(); 
             }
             else
             {
@@ -160,12 +160,24 @@ namespace CapaUI
         }
         private void CargarEstablecimientos()
         {
-            dgvEstablecimientos.DataSource = null;
-            dgvEstablecimientos.DataSource = establecimientoCN.Listar();
+            try
+            {
+                dgvEstablecimientos.DataSource = null;
+                var lista = establecimientoCN.Listar();
+                dgvEstablecimientos.DataSource = lista;
 
-            // Opcional: ocultar columnas internas
-            dgvEstablecimientos.Columns["EstablecimientoID"].Visible = false;
-            dgvEstablecimientos.Columns["UsuarioRegistroID"].Visible = false;
+                dgvEstablecimientos.Columns["EstablecimientoID"].Visible = false;
+                dgvEstablecimientos.Columns["UsuarioRegistroID"].Visible = false;
+
+                if (lista.Count == 0)
+                {
+                    MessageBox.Show("No hay registros para mostrar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar: " + ex.Message);
+            }
         }
 
         private void dgvEstablecimientos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -193,8 +205,234 @@ namespace CapaUI
         }
 
        
+
+        private void btnInactivar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRUC.Text))
+            {
+                MessageBox.Show("Seleccione un establecimiento para inactivar.");
+                return;
+            }
+
+            if (MessageBox.Show("¿Está seguro de inactivar este establecimiento?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                bool inactivado = establecimientoCN.Inactivar(txtRUC.Text.Trim());
+                if (inactivado)
+                {
+                    MessageBox.Show("Establecimiento inactivado correctamente.");
+                    CargarEstablecimientos();
+                    LimpiarCampos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al inactivar el establecimiento.");
+                }
+            }
         }
 
+        //lista de inactivos mostrar
+        private void chkMostrarInactivos_CheckedChanged(object sender, EventArgs e)
+        {
+            CargarEstablecimientoss(chkMostrarInactivos.Checked);
+        }
+        private void CargarEstablecimientoss(bool mostrarInactivos = false)
+        {
+            try
+            {
+                dgvEstablecimientos.DataSource = null;
 
+                var lista = establecimientoCN.Listar(mostrarInactivos);
+
+                dgvEstablecimientos.DataSource = lista;
+
+                // Ocultar columnas no necesarias
+                dgvEstablecimientos.Columns["EstablecimientoID"].Visible = false;
+                dgvEstablecimientos.Columns["UsuarioRegistroID"].Visible = false;
+
+                // Configurar columna Activo como CheckBox
+                if (dgvEstablecimientos.Columns["Activo"] != null)
+                {
+                    dgvEstablecimientos.Columns["Activo"].ReadOnly = true;
+                    dgvEstablecimientos.Columns["Activo"].HeaderText = "Activo";
+                    dgvEstablecimientos.Columns["Activo"].CellTemplate = new DataGridViewCheckBoxCell();
+                }
+
+                // Ajustes generales
+                dgvEstablecimientos.ReadOnly = true;
+                dgvEstablecimientos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgvEstablecimientos.MultiSelect = false;
+                dgvEstablecimientos.AllowUserToAddRows = false;
+                dgvEstablecimientos.AllowUserToDeleteRows = false;
+
+                if (lista.Count == 0)
+                {
+                    MessageBox.Show("No hay registros para mostrar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar: " + ex.Message);
+            }
+        }
+
+        private void diseno()
+        {
+
+            // chkMostrarInactivos
+            chkMostrarInactivos.Text = "Mostrar Todos";
+            chkMostrarInactivos.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            chkMostrarInactivos.ForeColor = Color.DarkRed;
+            chkMostrarInactivos.Location = new Point(730, 310);
+            chkMostrarInactivos.AutoSize = true;
+            chkMostrarInactivos.BackColor = Color.WhiteSmoke;
+
+
+            lblTitulo.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+            lblTitulo.ForeColor = Color.DarkRed;
+            lblTitulo.Dock = DockStyle.Top;
+            lblTitulo.Height = 40;
+            lblTitulo.TextAlign = ContentAlignment.MiddleLeft;
+            lblTitulo.Padding = new Padding(20, 0, 0, 0);
+
+
+            label1.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label1.Location = new Point(20, 50);
+            txtRUC.Location = new Point(130, 48);
+            txtRUC.Width = 150;
+
+            label2.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label2.Location = new Point(20, 90);
+            txtRazonSocial.Location = new Point(130, 88);
+            txtRazonSocial.Width = 250;
+
+            label3.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label3.Location = new Point(420, 90);
+            txtNombreComercial.Location = new Point(550, 88);
+            txtNombreComercial.Width = 200;
+
+            label4.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label4.Location = new Point(20, 130);
+            txtDireccion.Location = new Point(130, 128);
+            txtDireccion.Width = 400;
+
+            label13.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label13.Location = new Point(20, 170);
+            txtDepartamento.Location = new Point(130, 168);
+            txtDepartamento.Width = 150;
+
+            label12.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label12.Location = new Point(300, 170);
+            txtProvincia.Location = new Point(380, 168);
+            txtProvincia.Width = 150;
+
+            label11.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label11.Location = new Point(550, 170);
+            txtDistrito.Location = new Point(620, 168);
+            txtDistrito.Width = 150;
+
+            label5.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label5.Location = new Point(20, 210);
+            txtEstado.Location = new Point(180, 208);
+            txtEstado.Width = 150;
+
+            label6.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label6.Location = new Point(350, 210);
+            txtCondicion.Location = new Point(450, 208);
+            txtCondicion.Width = 150;
+
+            label7.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label7.Location = new Point(620, 210);
+            txtUbigeo.Location = new Point(700, 208);
+            txtUbigeo.Width = 100;
+
+            label8.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label8.Location = new Point(20, 250);
+            cmbTipoNegocio.Location = new Point(150, 248);
+            cmbTipoNegocio.Width = 200;
+
+            label10.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            label10.Location = new Point(400, 250);
+            cmbEstadoSanitario.Location = new Point(530, 248);
+            cmbEstadoSanitario.Width = 200;
+
+            // botones
+            btnNuevo.Text = "Nuevo";
+            btnNuevo.Size = new Size(120, 40);
+            btnNuevo.BackColor = Color.Gray;
+            btnNuevo.ForeColor = Color.White;
+            btnNuevo.Location = new Point(20, 300);
+
+            btnGuardar.Text = "Guardar";
+            btnGuardar.Size = new Size(120, 40);
+            btnGuardar.BackColor = Color.DarkRed;
+            btnGuardar.ForeColor = Color.White;
+            btnGuardar.Location = new Point(160, 300);
+
+            btnEditar.Text = "Editar";
+            btnEditar.Size = new Size(120, 40);
+            btnEditar.BackColor = Color.Gray;
+            btnEditar.ForeColor = Color.White;
+            btnEditar.Location = new Point(300, 300);
+
+            btnInactivar.Text = "Inactivar";
+            btnInactivar.Size = new Size(120, 40);
+            btnInactivar.BackColor = Color.DimGray;
+            btnInactivar.ForeColor = Color.White;
+            btnInactivar.Location = new Point(440, 300);
+
+            btnActivar.Text = "Activar";
+            btnActivar.Size = new Size(120, 40);
+            btnActivar.BackColor = Color.SeaGreen;
+            btnActivar.ForeColor = Color.White;
+            btnActivar.Location = new Point(580, 300);
+         
+            // datagrid
+            dgvEstablecimientos.Location = new Point(20, 360);
+            dgvEstablecimientos.Size = new Size(1100, 300);
+            dgvEstablecimientos.BackgroundColor = Color.White;
+            dgvEstablecimientos.GridColor = Color.DarkRed;
+            dgvEstablecimientos.ColumnHeadersDefaultCellStyle.BackColor = Color.DarkRed;
+            dgvEstablecimientos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvEstablecimientos.EnableHeadersVisualStyles = false;
+            dgvEstablecimientos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+            // formulario
+            this.BackColor = Color.WhiteSmoke;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.TopLevel = false;
+            this.Dock = DockStyle.Fill;
+            this.AutoScroll = true;
+
+
+            dgvEstablecimientos.ReadOnly = true;
+           
+
+        }
+
+        private void btnActivar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtRUC.Text))
+            {
+                MessageBox.Show("Seleccione un establecimiento para activar.");
+                return;
+            }
+
+            if (MessageBox.Show("¿Está seguro de activar este establecimiento?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                bool activado = establecimientoCN.Activar(txtRUC.Text.Trim());
+                if (activado)
+                {
+                    MessageBox.Show("Establecimiento activado correctamente.");
+                    CargarEstablecimientoss(chkMostrarInactivos.Checked);
+                    LimpiarCampos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al activar el establecimiento.");
+                }
+            }
+        }
+    }
 }
 

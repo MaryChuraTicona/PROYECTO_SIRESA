@@ -41,7 +41,8 @@ namespace CapaUI
                 return;
             }
 
-            Establecimiento est = estCN.Listar().FirstOrDefault(x => x.EstablecimientoID == fiscal.EstablecimientoID);
+            Establecimiento  est = estCN.ObtenerEstablecimientoPorID(fiscal.EstablecimientoID);
+
 
             Empleado inspector = empleadoCN.ObtenerEmpleados().FirstOrDefault(emp => emp.EmpleadoID == empleadoID);
 
@@ -74,7 +75,8 @@ namespace CapaUI
 
             foreach (var c in criterios)
             {
-                dgvCriterios.Rows.Add(c.Numero, c.Criterio, c.NivelRiesgo, false, "📸", ""); // Cumple=False, botón 📸
+                dgvCriterios.Rows.Add(c.CriterioID.ToString(), c.Nombre, c.NivelRiesgo, false, "📸", "");
+
             }
         }
 
@@ -154,6 +156,11 @@ namespace CapaUI
                 MessageBox.Show("Error al capturar imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
     }
 }
 

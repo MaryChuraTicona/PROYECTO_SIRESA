@@ -61,7 +61,7 @@ namespace CapaDatos
 
             using (SqlConnection conn = conexion.AbrirConexion())
             {
-                string query = "SELECT * FROM Establecimientos";
+                string query = "SELECT * FROM Establecimientos WHERE Activo = 1";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 SqlDataReader dr = cmd.ExecuteReader();
 
@@ -80,13 +80,105 @@ namespace CapaDatos
                         TipoNegocio = dr["TipoNegocio"].ToString(),
                         EstadoSanitario = dr["EstadoSanitario"].ToString(),
                         FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]),
-                        UsuarioRegistroID = (int)dr["UsuarioRegistroID"]
+                        UsuarioRegistroID = (int)dr["UsuarioRegistroID"],
+                        Correo = dr["Correo"] != DBNull.Value ? dr["Correo"].ToString() : "",
+                        Activo = dr["Activo"] != DBNull.Value ? (bool)dr["Activo"] : true
+
                     });
                 }
             }
 
             return lista;
         }
+
+
+        public List<Establecimiento> Listar(bool mostrarTodos)
+        {
+            List<Establecimiento> lista = new List<Establecimiento>();
+
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = "SELECT * FROM Establecimientos";
+                if (!mostrarTodos)
+                    query += " WHERE Activo = 1";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    lista.Add(new Establecimiento
+                    {
+                        EstablecimientoID = (int)dr["EstablecimientoID"],
+                        RUC = dr["RUC"].ToString(),
+                        RazonSocial = dr["RazonSocial"].ToString(),
+                        NombreComercial = dr["NombreComercial"].ToString(),
+                        Direccion = dr["Direccion"].ToString(),
+                        EstadoContribuyente = dr["EstadoContribuyente"].ToString(),
+                        CondicionContribuyente = dr["CondicionContribuyente"].ToString(),
+                        Ubigeo = dr["Ubigeo"].ToString(),
+                        TipoNegocio = dr["TipoNegocio"].ToString(),
+                        EstadoSanitario = dr["EstadoSanitario"].ToString(),
+                        FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]),
+                        UsuarioRegistroID = (int)dr["UsuarioRegistroID"],
+                        Correo = dr["Correo"] != DBNull.Value ? dr["Correo"].ToString() : "",
+                        Activo = dr["Activo"] != DBNull.Value ? (bool)dr["Activo"] : true
+                    });
+                }
+            }
+            return lista;
+        }
+
+        public bool Inactivar(string ruc)
+        {
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = "UPDATE Establecimientos SET Activo = 0 WHERE RUC = @ruc";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ruc", ruc);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public bool Activar(string ruc)
+        {
+            using (SqlConnection conn = conexion.AbrirConexion())
+            {
+                string query = "UPDATE Establecimientos SET Activo = 1 WHERE RUC = @ruc";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@ruc", ruc);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
+
+        public Establecimiento ObtenerEstablecimientoPorID(int id)
+        {
+            using (var conn = conexion.AbrirConexion())
+            {
+                string query = @"SELECT EstablecimientoID, RazonSocial, NombreComercial, RUC, Direccion
+                         FROM Establecimientos
+                         WHERE EstablecimientoID = @id";
+
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.Read())
+                {
+                    return new Establecimiento
+                    {
+                        EstablecimientoID = (int)dr["EstablecimientoID"],
+                        RazonSocial = dr["RazonSocial"].ToString(),
+                        NombreComercial = dr["NombreComercial"].ToString(),
+                        RUC = dr["RUC"].ToString(),
+                        Direccion = dr["Direccion"].ToString()
+                    };
+                }
+            }
+            return null;
+        }
+
 
     }
 

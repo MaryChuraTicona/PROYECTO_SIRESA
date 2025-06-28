@@ -83,6 +83,7 @@
             this.txtDNI.Name = "txtDNI";
             this.txtDNI.Size = new System.Drawing.Size(100, 20);
             this.txtDNI.TabIndex = 3;
+            this.txtDNI.Leave += new System.EventHandler(this.txtDNI_Leave_1);
             // 
             // txtNombres
             // 
