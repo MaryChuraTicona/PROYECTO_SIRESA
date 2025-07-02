@@ -50,6 +50,12 @@
     <Reference Include="AForge.Video.DirectShow, Version=2.2.5.0, Culture=neutral, PublicKeyToken=61ea4348d43881b7, processorArchitecture=MSIL">
       <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.3296.44, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.WebView2.1.0.3296.44\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
@@ -75,6 +81,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmCapturaEvidencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCapturaEvidencia.Designer.cs">
+      <DependentUpon>frmCapturaEvidencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCapturaFiscalizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCapturaFiscalizacion.Designer.cs">
+      <DependentUpon>frmCapturaFiscalizacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCriterioBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +159,12 @@
     <Compile Include="frmHistorialAccesos.Designer.cs">
       <DependentUpon>frmHistorialAccesos.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmImagen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImagen.Designer.cs">
+      <DependentUpon>frmImagen.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +209,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCapturaEvidencia.resx">
+      <DependentUpon>frmCapturaEvidencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCapturaFiscalizacion.resx">
+      <DependentUpon>frmCapturaFiscalizacion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCriterioBase.resx">
       <DependentUpon>frmCriterioBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -217,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmHistorialAccesos.resx">
       <DependentUpon>frmHistorialAccesos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImagen.resx">
+      <DependentUpon>frmImagen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

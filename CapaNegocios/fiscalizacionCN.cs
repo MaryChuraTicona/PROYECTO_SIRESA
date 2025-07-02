@@ -50,9 +50,9 @@ namespace CapaNegocios
             return fiscalCD.ObtenerFiscalizacionesPorEmpleado(empleadoID);
         }
 
-        public bool MarcarFiscalizacionComoFinalizada(int id)
+        public bool MarcarFiscalizacionComoFinalizada(int id, string rutaActa)
         {
-            return fiscalCD.MarcarFiscalizacionComoFinalizada(id);
+            return fiscalCD.MarcarFiscalizacionComoFinalizada(id, rutaActa);
         }
 
         public bool ExisteFiscalizacionEnFecha(int establecimientoID, DateTime fecha)

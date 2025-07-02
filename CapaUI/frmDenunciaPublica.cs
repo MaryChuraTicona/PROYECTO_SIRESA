@@ -141,7 +141,9 @@ namespace CapaUI
                 RUC = txtRUC.Text,
                 NombreEstablecimiento = txtNombreEstablecimiento.Text,
                 DireccionEstablecimiento = txtDireccionEstablecimiento.Text
-            };
+            }; 
+
+
 
             var cn = new denunciaCN();
             string respuesta = cn.GuardarDenuncia(denuncia);

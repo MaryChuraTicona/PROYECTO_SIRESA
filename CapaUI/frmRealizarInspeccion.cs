@@ -11,6 +11,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CapaEntidad;
 using CapaNegocios;
+using static System.Net.WebRequestMethods;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+
+
+
 
 namespace CapaUI
 {
@@ -88,7 +94,10 @@ namespace CapaUI
             {
                 if (row.IsNewRow) continue;
 
-                var cumple = Convert.ToBoolean(row.Cells["ColCumple"].Value) ? "SÍ" : "NO";
+                var cumpleCheck = row.Cells["ColResultado"].Value as bool?;
+                var cumple = (cumpleCheck.HasValue && cumpleCheck.Value) ? "SÍ" : "NO";
+
+
                 var rutaEvidencia = row.Cells["RutaEvidencia"]?.Value?.ToString() ?? "";
 
                 criterios.Add(new CriterioEvaluado
@@ -107,8 +116,10 @@ namespace CapaUI
 
             if (resultado == "OK")
             {
-                fiscalCN.MarcarFiscalizacionComoFinalizada(fiscalizacionID);
-                MessageBox.Show("Inspección registrada correctamente.");
+                string rutaActa = GenerarActaPDF(fiscalizacionID, criterios); 
+                fiscalCN.MarcarFiscalizacionComoFinalizada(fiscalizacionID, rutaActa);
+
+                MessageBox.Show("Inspección finalizada y acta generada correctamente.");
                 this.Close();
             }
             else
@@ -117,50 +128,82 @@ namespace CapaUI
             }
         }
 
+
+        private string GenerarActaPDF(int fiscalizacionID, List<CriterioEvaluado> criterios)
+        {
+            string carpeta = @"C:\ActasFiscalizacion";
+            Directory.CreateDirectory(carpeta);
+
+            string nombreArchivo = $"Acta_{fiscalizacionID}_{DateTime.Now:yyyyMMddHHmmss}.pdf";
+            string rutaFinal = Path.Combine(carpeta, nombreArchivo);
+
+            using (var doc = new iTextSharp.text.Document())
+            {
+                iTextSharp.text.pdf.PdfWriter.GetInstance(doc, new FileStream(rutaFinal, FileMode.Create));
+                doc.Open();
+                doc.Add(new iTextSharp.text.Paragraph($"Acta de Fiscalización ID {fiscalizacionID}"));
+                doc.Add(new iTextSharp.text.Paragraph($"Fecha: {DateTime.Now}"));
+                doc.Add(new iTextSharp.text.Paragraph($"--------------------"));
+
+                foreach (var c in criterios)
+                {
+                    doc.Add(new iTextSharp.text.Paragraph($"Nro: {c.Numero} | {c.Criterio} | {c.NivelRiesgo} | Cumple: {c.Resultado}"));
+                    if (!string.IsNullOrEmpty(c.Evidencia))
+                        doc.Add(new iTextSharp.text.Paragraph($"Evidencia: {c.Evidencia}"));
+                    doc.Add(new iTextSharp.text.Paragraph($"Observación: {c.Observacion}"));
+                    doc.Add(new iTextSharp.text.Paragraph($"--------------------"));
+                }
+
+                doc.Close();
+            }
+
+            return rutaFinal;
+        }
+
         private void dgvCriterios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+              
+            }
+
+        
+
+        private void dgvCriterios_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dgvCriterios.Columns[e.ColumnIndex].Name == "ColEvidencia")
             {
-                CapturarImagenDesdeCelular(e.RowIndex);
-            }
-        }
+                var valorCelda = dgvCriterios.Rows[e.RowIndex].Cells["ColEvidencia"].Value?.ToString();
 
-        private void CapturarImagenDesdeCelular(int fila)
-        {
-            try
-            {
-                string ipCamUrl = "http://192.168.1.23:4747/shot.jpg";
-
-                using (WebClient client = new WebClient())
+                if (valorCelda == "Ver")
                 {
-                    byte[] data = client.DownloadData(ipCamUrl);
-
-                    using (MemoryStream ms = new MemoryStream(data))
+                    string ruta = dgvCriterios.Rows[e.RowIndex].Cells["RutaEvidencia"].Value?.ToString();
+                    if (!string.IsNullOrEmpty(ruta) && System.IO.File.Exists(ruta))
                     {
-                        Image img = Image.FromStream(ms);
+                        var visor = new frmImagen(ruta);
+                        visor.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay imagen para mostrar.");
+                    }
+                }
+                else
+                {
+                    
+                    using (var captura = new frmCapturaFiscalizacion())
+                    {
+                        captura.ShowDialog();
 
-                        string numero = dgvCriterios.Rows[fila].Cells["ColNumero"].Value?.ToString() ?? "Criterio";
-                        string carpeta = @"C:\\Evidencias";
-                        if (!Directory.Exists(carpeta)) Directory.CreateDirectory(carpeta);
-
-                        string ruta = Path.Combine(carpeta, $"Evidencia_{numero}_{DateTime.Now.Ticks}.jpg");
-                        img.Save(ruta);
-
-                        MessageBox.Show("Imagen capturada y guardada correctamente.", "Captura", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        dgvCriterios.Rows[fila].Cells["RutaEvidencia"].Value = ruta;
+                        if (!string.IsNullOrEmpty(captura.RutaFotoFinal))
+                        {
+                            dgvCriterios.Rows[e.RowIndex].Cells["RutaEvidencia"].Value = captura.RutaFotoFinal;
+                            dgvCriterios.Rows[e.RowIndex].Cells["ColEvidencia"].Value = "Ver";
+                            MessageBox.Show("Imagen capturada y asignada al criterio.");
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al capturar imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-
-
-
-
-
     }
 }
 

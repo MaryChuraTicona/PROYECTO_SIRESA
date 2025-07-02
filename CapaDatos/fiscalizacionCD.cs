@@ -222,13 +222,20 @@ namespace CapaDatos
             return lista;
         }
 
-        public bool MarcarFiscalizacionComoFinalizada(int id)
+        public bool MarcarFiscalizacionComoFinalizada(int id, string rutaActa)
         {
             using (SqlConnection conn = new Conexion().AbrirConexion())
             {
-                string query = "UPDATE Fiscalizaciones SET EstadoFiscalizacion = 'Finalizada' WHERE FiscalizacionID = @id";
+                string query = @"
+            UPDATE Fiscalizaciones 
+            SET EstadoFiscalizacion = 'Finalizada',
+                ActaPDF = @rutaActa
+            WHERE FiscalizacionID = @id";
+
                 SqlCommand cmd = new SqlCommand(query, conn);
                 cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@rutaActa", rutaActa);
+
                 return cmd.ExecuteNonQuery() > 0;
             }
         }

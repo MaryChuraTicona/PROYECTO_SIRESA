@@ -43,13 +43,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtInspector = new System.Windows.Forms.TextBox();
             this.dgvCriterios = new System.Windows.Forms.DataGridView();
-            this.btnGuardarInspeccion = new System.Windows.Forms.Button();
             this.ColNumero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCriterio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRiesgo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColResultado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ColEvidencia = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColObservacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnGuardarInspeccion = new System.Windows.Forms.Button();
+            this.RutaEvidencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCriterios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,22 +175,14 @@
             this.ColRiesgo,
             this.ColResultado,
             this.ColEvidencia,
-            this.ColObservacion});
+            this.ColObservacion,
+            this.RutaEvidencia});
             this.dgvCriterios.Location = new System.Drawing.Point(34, 269);
             this.dgvCriterios.Name = "dgvCriterios";
             this.dgvCriterios.Size = new System.Drawing.Size(643, 150);
             this.dgvCriterios.TabIndex = 14;
             this.dgvCriterios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCriterios_CellClick);
-            // 
-            // btnGuardarInspeccion
-            // 
-            this.btnGuardarInspeccion.Location = new System.Drawing.Point(344, 228);
-            this.btnGuardarInspeccion.Name = "btnGuardarInspeccion";
-            this.btnGuardarInspeccion.Size = new System.Drawing.Size(75, 23);
-            this.btnGuardarInspeccion.TabIndex = 15;
-            this.btnGuardarInspeccion.Text = "Finalizar Inspeccion";
-            this.btnGuardarInspeccion.UseVisualStyleBackColor = true;
-            this.btnGuardarInspeccion.Click += new System.EventHandler(this.btnGuardarInspeccion_Click);
+            this.dgvCriterios.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCriterios_CellContentClick);
             // 
             // ColNumero
             // 
@@ -226,6 +219,21 @@
             // 
             this.ColObservacion.HeaderText = "Observacion";
             this.ColObservacion.Name = "ColObservacion";
+            // 
+            // btnGuardarInspeccion
+            // 
+            this.btnGuardarInspeccion.Location = new System.Drawing.Point(344, 228);
+            this.btnGuardarInspeccion.Name = "btnGuardarInspeccion";
+            this.btnGuardarInspeccion.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardarInspeccion.TabIndex = 15;
+            this.btnGuardarInspeccion.Text = "Finalizar Inspeccion";
+            this.btnGuardarInspeccion.UseVisualStyleBackColor = true;
+            this.btnGuardarInspeccion.Click += new System.EventHandler(this.btnGuardarInspeccion_Click);
+            // 
+            // RutaEvidencia
+            // 
+            this.RutaEvidencia.HeaderText = "Ruta Evidencia";
+            this.RutaEvidencia.Name = "RutaEvidencia";
             // 
             // frmRealizarInspeccion
             // 
@@ -281,5 +289,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColResultado;
         private System.Windows.Forms.DataGridViewButtonColumn ColEvidencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColObservacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RutaEvidencia;
     }
 }
